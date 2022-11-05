@@ -15,6 +15,12 @@ const styles = height =>
       height: height,
       borderRadius: 12,
       backgroundColor: 'white',
+      shadowColor: '#000000',
+      shadowOpacity: 0.03,
+      shadowOffset: {
+        width: 4,
+        height: 4,
+      },
     },
   });
 
