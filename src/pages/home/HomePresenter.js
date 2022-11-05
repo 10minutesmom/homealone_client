@@ -4,6 +4,9 @@ import Container from '../../components/atoms/Container';
 import Header from '../../components/organisms/Header';
 import Text from '../../components/atoms/Text';
 import Card from '../../components/atoms/Card';
+import TextWithIcon from '../../components/molecules/TextWithIcon';
+import location_icon from '../../asset/images/location_icon.png';
+import clock_icon from '../../asset/images/clock_icon.png';
 
 const HomePresenter = () => {
   return (
@@ -52,6 +55,16 @@ const HomePresenter = () => {
                 외부일정
               </Text>
             </View>
+            <Text size="small" color="grey" marginBottom={2}>
+              남은시간
+            </Text>
+            <Text size="extra" color="black" weight="bold" marginBottom={10}>
+              58 : 00
+            </Text>
+            <TextWithIcon source={location_icon} marginBottom={6}>
+              한양대학교
+            </TextWithIcon>
+            <TextWithIcon source={clock_icon}>15 : 00</TextWithIcon>
           </View>
         </Card>
       </View>
