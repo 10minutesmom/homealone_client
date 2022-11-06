@@ -3,13 +3,13 @@ import {View, StyleSheet} from 'react-native';
 import Icon from '../atoms/Icon';
 import Text from '../atoms/Text';
 
-const TextWithIcon = ({source, marginBottom, children}) => {
+const TextWithIcon = ({source, marginBottom, size, children}) => {
   return (
     <View style={styles(marginBottom).textWithIcon}>
       <View style={styles(marginBottom).icon}>
-        <Icon size="medium" source={source} />
+        <Icon size={size == 'small' ? 'small' : 'medium'} source={source} />
       </View>
-      <Text size="medium" color="black">
+      <Text size={size == 'small' ? 'small' : 'medium'} color="black">
         {children}
       </Text>
     </View>
