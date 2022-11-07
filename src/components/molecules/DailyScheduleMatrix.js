@@ -4,7 +4,7 @@ import Text from '../atoms/Text';
 import ScheduleBox from './ScheduleBox';
 import Box from '../atoms/Box';
 
-const DailyScheduleMatrix = ({width, day, dailyData}) => {
+const DailyScheduleMatrix = ({width, day, dailyData, onPress}) => {
   return (
     <View style={styles(day, 0).matrix}>
       <Text size="small" color="black" marginBottom={14}>
@@ -25,6 +25,7 @@ const DailyScheduleMatrix = ({width, day, dailyData}) => {
                   title="학교"
                   subTitle="외부일정"
                   location="학교"
+                  onPress={onPress}
                 />
               </View>
             ) : null}

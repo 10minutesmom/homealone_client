@@ -6,8 +6,11 @@ import add from '../../asset/images/add_icon.png';
 import Text from '../../components/atoms/Text';
 import {Dimensions} from 'react-native';
 import DailyScheduleMatrix from '../../components/molecules/DailyScheduleMatrix';
+import BottomSheet from 'reanimated-bottom-sheet';
+import ScheduleSheetContainer from '../../sheet/ScheduleSheet/ScheduleSheetContainer';
+import {Portal} from '@gorhom/portal';
 
-const SchedulePresenter = () => {
+const SchedulePresenter = ({openSheet, sheetRef}) => {
   const day = ['mon', 'tue', 'wed', 'thu', 'fri'];
   const time = [
     '12am',
@@ -55,11 +58,21 @@ const SchedulePresenter = () => {
                 width={Dimensions.get('window').width - 64}
                 day={item}
                 dailyData={data}
+                onPress={openSheet}
               />
             );
           })}
         </View>
       </ScrollView>
+      <Portal>
+        <BottomSheet
+          ref={sheetRef}
+          snapPoints={[450, 0]}
+          borderRadius={10}
+          renderContent={ScheduleSheetContainer}
+          initialSnap={1}
+        />
+      </Portal>
     </Container>
   );
 };

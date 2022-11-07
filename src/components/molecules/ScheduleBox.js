@@ -1,26 +1,28 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../atoms/Text';
 import TextWithIcon from '../molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
 
-const ScheduleBox = ({hour, width, title, subTitle, location}) => {
+const ScheduleBox = ({hour, width, title, subTitle, location, onPress}) => {
   return (
-    <View style={boxStyle(hour, width).scheduleBox}>
-      <View style={styles.textBox}>
-        <Text size="medium" color="black" marginBottom={2}>
-          {title}
-        </Text>
-        <Text size="small" color="grey">
-          {subTitle}
-        </Text>
+    <TouchableOpacity onPress={() => onPress()}>
+      <View style={boxStyle(hour, width).scheduleBox}>
+        <View style={styles.textBox}>
+          <Text size="medium" color="black" marginBottom={2}>
+            {title}
+          </Text>
+          <Text size="small" color="grey">
+            {subTitle}
+          </Text>
+        </View>
+        <View style={styles.icon}>
+          <TextWithIcon source={location_icon} size="small">
+            {location}
+          </TextWithIcon>
+        </View>
       </View>
-      <View style={styles.icon}>
-        <TextWithIcon source={location_icon} size="small">
-          {location}
-        </TextWithIcon>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

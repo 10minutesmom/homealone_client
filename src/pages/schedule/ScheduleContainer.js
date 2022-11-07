@@ -1,8 +1,16 @@
-import React from "react";
-import SchedulePresenter from "./SchedulePresenter";
+import React, {useEffect, useCallback, useRef} from 'react';
+import SchedulePresenter from './SchedulePresenter';
 
 const ScheduleContainer = () => {
-  const props = {};
+  const sheetRef = useRef(null);
+  const openSheet = useCallback(() => {
+    sheetRef.current.snapTo(0);
+  }, []);
+
+  const props = {
+    openSheet: openSheet,
+    sheetRef: sheetRef,
+  };
   return <SchedulePresenter {...props} />;
 };
 
