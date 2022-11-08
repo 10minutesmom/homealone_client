@@ -10,12 +10,17 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import ScheduleSheetContainer from '../../sheet/ScheduleSheet/ScheduleSheetContainer';
 import {Portal} from '@gorhom/portal';
 import Animated from 'react-native-reanimated';
+import Dialog, {DialogContent} from 'react-native-popup-dialog';
+import ScheduleModal from '../../modal/schedule/ScheduleModalContainer';
 
 const SchedulePresenter = ({
   openSheet,
-  sheetRef,
   animatedShadowOpacity,
+  openDialog,
+  closeDialog,
   fall,
+  sheetRef,
+  isVisibleDialog,
 }) => {
   const day = ['mon', 'tue', 'wed', 'thu', 'fri'];
   const time = [
@@ -84,6 +89,7 @@ const SchedulePresenter = ({
                 title="학교가기"
                 type="내부일정"
                 location="한양대학교"
+                onPress={openDialog}
               />
             );
           }}
@@ -100,6 +106,11 @@ const SchedulePresenter = ({
           },
         ]}
       />
+      <Dialog visible={isVisibleDialog} onTouchOutside={() => closeDialog()}>
+        <DialogContent>
+          <ScheduleModal />
+        </DialogContent>
+      </Dialog>
     </Container>
   );
 };

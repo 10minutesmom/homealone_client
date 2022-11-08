@@ -5,7 +5,14 @@ import TextWithIcon from '../../components/molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
 import Button from '../../components/molecules/Button';
 
-const ScheduleSheetPresenter = ({day, time, title, type, location}) => {
+const ScheduleSheetPresenter = ({
+  day,
+  time,
+  title,
+  type,
+  location,
+  onPress,
+}) => {
   return (
     <View style={styles.sheet}>
       <View style={styles.bar} />
@@ -34,12 +41,12 @@ const ScheduleSheetPresenter = ({day, time, title, type, location}) => {
         </TextWithIcon>
         <View style={styles.buttons}>
           <View style={{marginRight: 8}}>
-            <Button border={true} width={132}>
+            <Button border={true} width={132} onPress={() => onPress(0)}>
               수정하기
             </Button>
           </View>
 
-          <Button border={false} width={132}>
+          <Button border={false} width={132} onPress={() => onPress(1)}>
             삭제하기
           </Button>
         </View>
