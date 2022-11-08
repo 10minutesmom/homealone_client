@@ -13,7 +13,12 @@ const Button = ({big, border, width, icon, onPress, children}) => {
             <Icon size="big" source={icon} />
           </View>
         ) : null}
-        <Text size="medium">{children}</Text>
+        <Text
+          size="medium"
+          color={border == true ? 'black' : 'white'}
+          weight={border == false ? 'bold' : ''}>
+          {children}
+        </Text>
       </View>
     </TouchableOpacity>
   );

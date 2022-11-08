@@ -9,8 +9,14 @@ import DailyScheduleMatrix from '../../components/molecules/DailyScheduleMatrix'
 import BottomSheet from 'reanimated-bottom-sheet';
 import ScheduleSheetContainer from '../../sheet/ScheduleSheet/ScheduleSheetContainer';
 import {Portal} from '@gorhom/portal';
+import Animated from 'react-native-reanimated';
 
-const SchedulePresenter = ({openSheet, sheetRef}) => {
+const SchedulePresenter = ({
+  openSheet,
+  sheetRef,
+  animatedShadowOpacity,
+  fall,
+}) => {
   const day = ['mon', 'tue', 'wed', 'thu', 'fri'];
   const time = [
     '12am',
@@ -67,12 +73,33 @@ const SchedulePresenter = ({openSheet, sheetRef}) => {
       <Portal>
         <BottomSheet
           ref={sheetRef}
-          snapPoints={[450, 0]}
-          borderRadius={10}
-          renderContent={ScheduleSheetContainer}
+          snapPoints={[312, 0]}
+          borderRadius={30}
+          callbackNode={fall}
+          renderContent={() => {
+            return (
+              <ScheduleSheetContainer
+                day="월요일"
+                time="10:00~10:00"
+                title="학교가기"
+                type="내부일정"
+                location="한양대학교"
+              />
+            );
+          }}
           initialSnap={1}
         />
       </Portal>
+      <Animated.View
+        pointerEvents="none"
+        style={[
+          {
+            ...StyleSheet.absoluteFillObject,
+            backgroundColor: '#000',
+            opacity: animatedShadowOpacity,
+          },
+        ]}
+      />
     </Container>
   );
 };
