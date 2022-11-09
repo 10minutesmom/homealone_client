@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "901450689454",
+    "project_id": "home-alone-7e1a9",
+    "storage_bucket": "home-alone-7e1a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901450689454:android:59c53852b9c12007e9b63f",
+        "android_client_info": {
+          "package_name": "com.homealone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901450689454-a82dvehl2ehq9ad87fr6i6r75bgspol5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.homealone",
+            "certificate_hash": "6dfd56fb2ee81ed591bc1a4ebddd05f6c9ecd83e"
+          }
+        },
+        {
+          "client_id": "901450689454-i3lg8rikoo8d8fmgctahldqfq35t11l9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2TznW0Bn2Y6BST8WS54txM1TJV10_W7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "901450689454-i3lg8rikoo8d8fmgctahldqfq35t11l9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

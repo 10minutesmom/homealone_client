@@ -5,7 +5,7 @@ import Text from '../../components/atoms/Text';
 import Button from '../../components/molecules/Button';
 import Icon from '../../asset/images/google_icon.png';
 
-const LoginPresenter = ({navigate}) => {
+const LoginPresenter = ({navigate, loginWithGoogle}) => {
   return (
     <Container>
       <View style={[styles.text, {marginTop: 270}]}>
@@ -19,7 +19,7 @@ const LoginPresenter = ({navigate}) => {
         </Text>
       </View>
       <View style={styles.button}>
-        <Button big border width="100%" icon={Icon} onPress={navigate}>
+        <Button big border width="100%" icon={Icon} onPress={loginWithGoogle}>
           Google 계정으로 로그인
         </Button>
       </View>
