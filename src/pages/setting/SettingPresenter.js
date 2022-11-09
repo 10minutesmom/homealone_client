@@ -8,8 +8,8 @@ import Menu from '../../components/molecules/Menu';
 
 const SettingPresenter = () => {
   return (
-    <Container center={false}>
-      <Header>SETTING</Header>
+    <Container>
+      <Header marginBottom={48}>SETTING</Header>
       <ProfileBox
         source={profile}
         name={'김동현'}

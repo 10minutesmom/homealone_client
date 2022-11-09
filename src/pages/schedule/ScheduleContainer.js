@@ -5,6 +5,7 @@ import Animated from 'react-native-reanimated';
 const ScheduleContainer = () => {
   const sheetRef = useRef(null);
   const modalRef = useRef(0);
+  const modifyDataRef = useRef({});
   const fall = useRef(new Animated.Value(1)).current;
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
 
@@ -17,9 +18,10 @@ const ScheduleContainer = () => {
     sheetRef.current.snapTo(0);
   }, []);
 
-  const openDialog = useCallback(id => {
-    console.log(id);
+  const openDialog = useCallback((id, ...props) => {
+    sheetRef.current.snapTo(1);
     modalRef.current = id;
+    modifyDataRef.current = props;
     setIsVisibleDialog(true);
   });
 
@@ -34,6 +36,8 @@ const ScheduleContainer = () => {
     closeDialog: closeDialog,
     fall,
     sheetRef,
+    modalRef,
+    modifyDataRef,
     isVisibleDialog,
   };
   return <SchedulePresenter {...props} />;

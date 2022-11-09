@@ -10,8 +10,9 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import ScheduleSheetContainer from '../../sheet/ScheduleSheet/ScheduleSheetContainer';
 import {Portal} from '@gorhom/portal';
 import Animated from 'react-native-reanimated';
-import Dialog, {DialogContent} from 'react-native-popup-dialog';
+import Dialog from 'react-native-popup-dialog';
 import ScheduleModal from '../../modal/schedule/ScheduleModalContainer';
+import BasicModal from '../../modal/basic/BasicModalContainer';
 
 const SchedulePresenter = ({
   openSheet,
@@ -20,6 +21,8 @@ const SchedulePresenter = ({
   closeDialog,
   fall,
   sheetRef,
+  modalRef,
+  modifyDataRef,
   isVisibleDialog,
 }) => {
   const day = ['mon', 'tue', 'wed', 'thu', 'fri'];
@@ -50,8 +53,10 @@ const SchedulePresenter = ({
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   ];
   return (
-    <Container color="white" center={false}>
-      <Header source={add}>SCHEDULE</Header>
+    <Container color="white">
+      <Header source={add} marginBottom={42} onPress={openDialog}>
+        SCHEDULE
+      </Header>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.schedule}>
           <View style={styles.time}>
@@ -107,9 +112,11 @@ const SchedulePresenter = ({
         ]}
       />
       <Dialog visible={isVisibleDialog} onTouchOutside={() => closeDialog()}>
-        <DialogContent>
-          <ScheduleModal />
-        </DialogContent>
+        {modalRef.current == 0 ? (
+          <ScheduleModal close={closeDialog} data={modifyDataRef} />
+        ) : (
+          <BasicModal close={closeDialog} />
+        )}
       </Dialog>
     </Container>
   );
@@ -118,7 +125,6 @@ const SchedulePresenter = ({
 const styles = StyleSheet.create({
   schedule: {
     flexDirection: 'row',
-    marginTop: 116,
     marginBottom: 100,
   },
   time: {

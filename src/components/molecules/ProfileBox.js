@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 122,
     marginBottom: 34,
   },
   avatar: {

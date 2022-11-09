@@ -1,8 +1,11 @@
-import React from "react";
-import BasicModalPresenter from "./BasicModalPresenter";
+import React from 'react';
+import BasicModalPresenter from './BasicModalPresenter';
 
-const BasicModalContainer = () => {
-  const props = {};
+const BasicModalContainer = ({close}) => {
+  const props = {
+    close: close,
+  };
+
   return <BasicModalPresenter {...props} />;
 };
 

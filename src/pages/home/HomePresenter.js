@@ -11,7 +11,7 @@ import clock_icon from '../../asset/images/clock_icon.png';
 const HomePresenter = () => {
   return (
     <Container>
-      <Header>HOME</Header>
+      <Header marginBottom={62}>HOME</Header>
       <View style={styles.card}>
         <Text color="black" size="semi" weight="bold" marginBottom={8}>
           아이 위치

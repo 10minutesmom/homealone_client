@@ -8,7 +8,7 @@ import Icon from '../../asset/images/google_icon.png';
 const LoginPresenter = ({navigate}) => {
   return (
     <Container>
-      <View style={styles.text}>
+      <View style={[styles.text, {marginTop: 270}]}>
         <Text size="extra" weight="bold" color="black" marginBottom={10}>
           Home Alone
         </Text>
