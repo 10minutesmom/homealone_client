@@ -1,9 +1,6 @@
 import React, {useEffect} from 'react';
 import LoginPresenter from './LoginPresenter';
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-} from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
 const LoginContainer = ({navigation}) => {

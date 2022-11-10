@@ -1,23 +1,25 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../atoms/Text';
 import Icon from '../atoms/Icon';
 import right_arrow_icon from '../../asset/images/right_arrow_icon.png';
 
-const menu = ({item}) => {
+const menu = listItem => {
   return (
     <View style={styles.menu}>
       <Text size="regular" color="black" weight="bold" marginBottom={20}>
         Account
       </Text>
-      {item.map(item => {
+      {listItem.listItem.listItem.map((item, index) => {
         return (
-          <View style={styles.item}>
-            <Text size="regular" color="black">
-              {item}
-            </Text>
-            <Icon size="small" source={right_arrow_icon} />
-          </View>
+          <TouchableOpacity key={index} onPress={() => item.method()}>
+            <View style={styles.item}>
+              <Text size="regular" color="black">
+                {item.title}
+              </Text>
+              <Icon size="small" source={right_arrow_icon} />
+            </View>
+          </TouchableOpacity>
         );
       })}
     </View>

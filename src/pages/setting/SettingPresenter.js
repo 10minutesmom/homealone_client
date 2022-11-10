@@ -6,7 +6,7 @@ import ProfileBox from '../../components/molecules/ProfileBox';
 import profile from '../../asset/images/profile.jpeg';
 import Menu from '../../components/molecules/Menu';
 
-const SettingPresenter = () => {
+const SettingPresenter = listItem => {
   return (
     <Container>
       <Header marginBottom={48}>SETTING</Header>
@@ -16,7 +16,7 @@ const SettingPresenter = () => {
         email={'lmkn5342@gmail.com'}
       />
       <View style={styles.menu}>
-        <Menu item={['로그아웃', '도움말']} />
+        <Menu listItem={listItem} />
       </View>
     </Container>
   );
