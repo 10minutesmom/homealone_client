@@ -1,0 +1,398 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{kotex}
+\usepackage{tabularx}
+\usepackage{supertabular,booktabs}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{romannum}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{graphics}
+\usepackage{subfigure}
+\usepackage{float}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\pagenumbering{arabic}
+\begin{document}
+
+\title{Home Alone\\
+\small{Scheduling solution for home-alone child utilizing AI/ML\\}
+}
+
+\author{
+\IEEEauthorblockN{Kim Donghyun}
+\IEEEauthorblockA{\textit{dept. Information System} \\
+\textit{Hanyang Univ.}\\
+Seoul, Republic of Korea \\
+lmkn5342@gmail.com}
+\and
+\IEEEauthorblockN{Kim Yosub}
+\IEEEauthorblockA{\textit{dept. Information System} \\
+\textit{Hanyang Univ.}\\
+Seoul, Republic of Korea \\
+kys2312@hanyang.ac.kr}
+\and
+\IEEEauthorblockN{Lee Youngseo}
+\IEEEauthorblockA{\textit{dept. Information System} \\
+\textit{Hanyang Univ.}\\
+Seoul, Republic of Korea \\
+leenys.204@gmail.com}
+\and
+\IEEEauthorblockN{Cho Seyeon}
+\IEEEauthorblockA{\textit{dept. Information System} \\
+\textit{Hanyang Univ.}\\
+Seoul, Republic of Korea \\
+seyeon110@gmail.com}
+}
+\maketitle
+
+\begin{abstract}
+\textit{Childcare has been a major issue due to the rapid growth of dual-income families. Home Alone application is willing to solve the problems that arise from this type of family. It is an application that supervises a child alone at home in two terms. \\
+First, Home Alone enables parents to detect the location of the child inside the house in real time. Previous technologies mostly focused on searching for a target location outside rather than inside. This is because indoors is commonly considered to be safer than outdoors. In addition, privacy issues can occur when detecting the target inside. This application is differentiated from most applications on the market by focusing on the detection of the location and the kid’s current status inside the house. This process facilitates a robot cleaner. This approach will certainly minimize the risk of invasion of privacy. \\
+Second, Home Alone works as a child’s personal scheduler. A station tells the kid about an upcoming schedule and alarms children to get ready for the next schedule. This application alarms repeatedly so that he or she can wake up on their own. This will alleviate parents’ worries about their kid being late.\\
+By combining two features, Home Alone can also report to the parents if the kid is laying in bed when the next schedule is imminent. Then the parents can take an action, such as making a call to their kid. In short, this application can relieve parents from their anxiety about their kids being alone at home.\\
+}
+\end{abstract}
+
+\begin{IEEEkeywords}
+Application, AI, ML, Childcare, Dual-income, Location detection\\  \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\  \\ \\ \\ \\ \\ \\ \\ \\
+\end{IEEEkeywords}
+
+
+\large{Role Assignments}
+\begin{table}[H]
+\center
+\begin{tabular}{m{1.7cm} m{1.6cm} m{3.5cm}}
+\toprule
+Roles & Name & Task description \& etc.\\
+\midrule
+User & Cho Seyeon & He plays the role of a kid who needs his parents’ reach. However, because of dual-income problem, his parents cannot spend enough time with him. Therefore, our solution’s goal is to serve the user so that he doesn’t feel a deficiency in his parents’ care and prepare himself to manage his schedule on his own. \\\\
+Customer & Lee Youngseo & Her role is to emulate the thought of the parents who cannot directly take care of their kids being alone at home. The parents will rely on the application when they are not at home. Home Alone will automatically take care of the kid’s location and his or her schedule. \\\\
+Software developer & Kim Donghyun & He implements the service into an actual program by developing an application. Within a given blueprint made by the team, the developer builds the program by transforming requirements into codes. He’s also in charge of debugging and quality assurance in our project. \\\\
+Development manager & Kim Yosub & He plans the development schedule and arranges the service by adopting opinions from customers and users. With his communication skills, he deals with concerns and questions from the clients. He also handles the conflict between the front and back ends.  \\
+\bottomrule
+\end{tabular}
+\end{table}
+\newpage
+    
+\section{\Large{Introduction}}
+\begin{enumerate}[label=\arabic*.]
+    \item {\large{Motivation}} \\
+    \begin{enumerate}[label=\alph*.]
+        \item Too much burden of parenting for dual-income families\\
+        According to *Statistics Korea, 2021 Birth Statistics, National Accreditation Statistics No. 10103 Birth Statistics search*, South Korea’s birth rate has declined dramatically. Compared to 2015, in 2020, the birth rate per woman has declined from 1.2 to 0.8. It means on average, four out of five women have only one child and the other does not even have one. In addition, obviously, the number of babies born has also decreased from 438,400 to 272,300.[1] \\
+        Eunpyeong-gu social survey specifies the reasons for this circumstance. 30.3 percent of respondents selected “the burden of raising children” and 23.5 percent of respondents selected ”unstable state of jobs”. In short, it can be inferred that parenting problems in dual-income families are the main cause of the lowest birth rate.[2]\\
+        Lastly, to be honest, 2 members of our team were kids from dual-income families. We experienced deficiency in parenting, and we had hardships when we manage our schedule on our own. Home Alone will try to fulfill their needs of care from their parents. \\
+        \item Kids not being protected when they are coming back home\\
+        Crimes committed against children are still one of the biggest problems in society. In the midst of such crimes, kidnapping is constantly occurring every year. According to West Seoul Supreme Prosecutor Office’s Crime analysis data on child abduction, 65.3 percent of child abduction crimes take place from 12 p.m. to 6 p.m. This is more than half out of 100 percent and parents need to be careful and check their kid’s location during these hours.[3] However, in the case of dual-income families, no one can pick them up after school nor no one will be in the house waiting for the kid. Home Alone can be the safety net instead of parents. It can report to parents whether the kid has arrived home or not and the time of arrival. This notification can be a relief to the parents. \\
+    \end{enumerate}
+    \item {\large{Problem Statement}} \\
+    Dual-income families are commonplace nowadays. Within this type of family, the child has to spend most of the time alone at home even from a young age. This is likely to trigger the parenting problem since parents are completely unable (cannot afford) to look after the child. There are chiefly two issues that parents will face when they leave their kids alone. \\
+    \begin{enumerate}[label=\alph*.]
+        \item Parents do not know where the kid is if he or she is inside the house.  \\
+        Applications on the market such as i-sharing, Google Family Link, and Kakao maps allow people to check the target’s location. However, they are bounded to the outside only. Home Alone provides a new perspective by providing the kid’s location inside the house. Parents are willing for more information about their kid. They will eventually wonder where and what the kid is doing when he or she is at home. Because they cannot keep an eye on their kid for 24 hours, this application is supposed to solve their worries about their child partly. \\
+        \item Parents cannot take care of every child’s schedule.   \\
+        When adults are not in the house, children have a hard time arranging their schedules on their own since children tend to have low self-control compared to adults. Outside help is a must for kids to wake up at a certain time and to be on time with every schedule. For instance, kids have to wake up early every morning to go to school. However, most kids do not want it, rather they have trouble even from waking up. Without parents’ interference, he or she may just skip school and just sleep more. In this case, outside help will be the alarm. Home Alone replaces parents’ direct intervention by controlling plans instead.  \\
+    \end{enumerate}
+    \item {\large{Solution}} \\
+    This application is designed to solve the above problems in two ways. \\
+    \begin{enumerate}[label=\alph*.]
+        \item Location detection \\
+        Our application collaborates with one of LG’s white appliances, the robot vacuum cleaner. When the kid is detected as being at home, the robot vacuum cleaner periodically keeps track of the child’s location and sends his or her place to the parents. Beyond that, this location data is utilized in the following feature, schedule control, for accurate alarming. Through the Home Alone service, parents are able to find out the exact location of their kid is even inside the house and alleviate their worries.  \\
+        \item Schedule control  \\
+        This application shows the upcoming schedule and the remaining time for it. It notifies the child to get ready when the next schedule is imminent. Furthermore, there is a function that informs the kid 30 minutes before the schedule. With this function, the kid will keep in mind the plan and not forget it. Home Alone then informs the parents saying that the kid has left the home or not. It tells whether the kid has arrived home too. It reassures parents by caring for their child’s schedule in the case when they cannot be with their child. \\
+    \end{enumerate}
+    \item {\large{Related Software }} \\
+    \begin{enumerate}[label=\alph*.]
+        \item Google Calendar \\
+         Google Calendar is an application that controls users’ time wisely by enabling them to easily schedule activities and by sending reminders about upcoming events. Two following core features can be implemented in the Home Alone application. \\
+         \begin{enumerate}[label=\roman*.]
+            \item Private and business schedules all in one place \\
+            Google Calendar has the function to get schedules from other Google accounts. For example, if the user contains two calendars; a personal and a work calendar in a separate email address, he or she would have to open each calendar separately to check both schedules. This is inconvenient because the user cannot check personal/work schedules at a glance. In this situation, Google came up with the idea which is adding another account’s calendar to the existing one. If he or she adds a work account to the personal account, in the personal calendar, you can catch up on every schedule at once. Moreover, separating personal or work schedules by color will enhance user convenience even more. \\
+            \item Mark where you work \\
+            With the recent increase in the number of telecommuters around the world, Google added a new feature that allows consumers to check where they work every day. This can act as a reference when someone checks others’ calendars to find a suitable time for a meeting. Users can also set the default value of the place, as a placeholder. Or, on a special day, they can just simply change the location to somewhere else. In most cases, the place is divided into two big categories, home or outside. In outside circumstances, they can add the location name by using the ‘Other locations’ option. \\
+            \item Device notifications and email notifications \\
+            The user receives a device notification as well as a Gmail notification 10 minutes before the schedule. Even users can change the default setting from 10 to any period, anytime. Notification changes are applied only to the user who changed and other invited users to that schedule receive notifications based on their own settings. Changing the Alert tone is available too. The settings that he or she made on the mobile device also apply to computer notifications. If the user made the phone give an alarm one hour before an event, a pop-up notification will also appear on the user’s computer an hour before the schedule, just like the phone. \\               
+         \end{enumerate}
+        \item Google family link  \\
+        Google family link is an application that allows parents to supervise their child through the below procedures.  \\
+        \begin{enumerate}[label=\roman*.]
+            \item By linking the google family application to the child’s devices, parents can restrict the time of the kid’s playing games or watching YouTube which eventually leads to the prevention of smartphone addiction. \\ 
+            \item It can detect the child’s location outside of the house. By using the powerful geo-location technology in smartphones, Google Family Link visualizes kids’ real-time location. The parents can easily follow up child’s location updates through the application. \\
+        \end{enumerate}
+        \item Norton Family \\
+        Norton Family has features that can monitor child’s online activities and limit their usage. furthermore, it enables tracking a child’s location and history locations. \\
+        \begin{enumerate}[label=\roman*.]
+            \item Geo-fencing \\
+            One of Norton’s key features is to keep children from dangerous areas in the real world. Most children are unpredictable. They are too young to keep themselves safe. Newest Norton Family provides a geo-fencing feature. In the activities tab in the location section, users can see pins representing the recent location of kids on the map. Also, clients can be notified when kids go away too far from their boundaries. The boundary can be set up to 10500 feet at maximum. \\ 
+            \item Timeline of kids’ route \\
+            Moreover, the Norton Family provides a recent timeline when those pins are added so that users can find out their kids’ routes. If they want, it provides filtered data with date and time for easier search. \\
+        \end{enumerate}        
+    \end{enumerate}
+\end{enumerate}
+
+\section{\Large{Requirement Analysis}}
+\begin{enumerate}[label=\arabic*.]
+    \item {\large{Turning on APP}} \\
+    After the User (Parents) downloads the app, the user touches the app icon on the home screen. When touching the icon, a loading page with a logo in the middle appears. It shows the loading icon for a while and Service agreements appear. After agreeing with service agreements, the screen turns into the tutorial page. The tutorial page shows a guide for using the app with several pictures. After sliding through those pages, the login page appears. \\
+    \item {\large{Login}} \\    
+    The user needs to login for identification. As this application deals with the child’s individual schedule, each and every child’s information must be stored based on the user’s account. Therefore, users must identify themselves before using this application. As the external authorization method is used, the user does not have to register before using this application. Thus, if the user touches the login button, the page turns into an external login page(ex. Google). The user types ID and PW to login within this page. After logging in, the page returns to the application, and the loading page appears again. When the loading is done, the initial configuration page appears. \\
+    \item {\large{Managing schedule}} \\        
+    This page initially appears for registering a kid’s schedule. The schedule manager is a function that brings schedule data into an application. Parents add their kid’s schedules by touching plus sign. They enter kids’ schedules in the following form. \\
+    \begin{enumerate}[label=\alph*.]
+        \item Title
+        \item Time (starting time and ending time)
+        \item Place (Home or School or Institute or etc.)\\
+    \end{enumerate}
+    After the user enters kids’ schedule and touches enter, the schedule management page shows the registered schedule as a block in a timetable. If the user touches the existing schedule block, the page represents two options; delete or modify. If the user touches delete, the application asks again. When the user touches the delete button once more, the schedule is finally deleted. If the user touches modify button, the same screen appears at entering the schedule but is filled with data. If the user touches enter button, data commits.\\
+    \item {\large{Check locational status/ schedule status}} \\
+    After the user enters the main page, the user can see two parts. locational status and schedule-related status. \\
+    \begin{enumerate}[label=\alph*.]
+        \item Kid's locational status \\
+        The kid’s locational status block is located at the upper half of the page. It shows whether the kid is at home or not. If he or she is at home, then the word ‘IN’ will be emphasized whereas in the opposite case, the word ‘OUT’ will be highlighted. It also provides the location of the kid when the kid is in the house. \\
+        \item Kid’s schedule-related status \\
+        The kid’s schedule status block is located at the lower half of the page. This block is divided into three parts. \\    
+        \begin{enumerate}[label=\roman*.]
+            \item The time remaining until the most immediate schedule 
+            \item The place where the schedule is taken 
+            \item Whether the schedule is taken inside or outside of the house \\
+        \end{enumerate}      
+        For example, let’s say the time is now 7’o clock and school begins at 8’o clock. Then the application calculates the remaining time by adding up safety margin time and adding ready time and moving time, given by the parents. Let's say the sum of three factors is 40 minutes. then the time remaining will be 20 minutes. \\
+        Three things will be shown which are: \\
+        \begin{enumerate}[label=\roman*.]
+            \item 20 minutes (time remaining)
+            \item OUT (whether the schedule is ‘IN’ or ‘OUT’) \\ 
+        \end{enumerate}
+    \end{enumerate}    
+    \item {\large{Detect the child’s location}} \\        
+    Detecting location is done by utilizing picture data from a robot cleaner and an installed camera. LG robot cleaner is able to detect its location of itself in the house. It can also detect an object’s existence by taking pictures in a designated place. The pictures will be processed by the Machine Learning (ML) algorithm. Suppose the robot cleaner is directing the living room. If the kid’s face is detected in the picture, the existence of the kid is verified. This means that the kid is at the living room. \\
+    \begin{enumerate}[label=\alph*.]
+        \item Workflow of the location detector \\
+        \begin{enumerate}[label=\roman*.]
+            \item Get a signal from a schedule manager in order to run a detecting mechanism whether the child has to be at home or not.
+            \item If the schedule states that the kid should not be at home, the robot cleaner should only run as a cleaner mode and other agents should not work as detecting agents.
+            \item If the schedule states that the kid should be at home, the robot cleaner should work as a detector. It will check certain spots like a living room or a bedroom periodically and take photos of those locations. \\
+        \end{enumerate}    
+    \item {\large{Detect the child’s pose}} \\        
+    This service detects a child’s current pose in three states which are laying, sitting, and standing. The methodology for detecting child pose is the ML algorithm. With the statistical model, we expect the child pose from 5 pictures. Service utilizes that pose data for updating kids’ locational status. \\     
+    \end{enumerate}
+\end{enumerate}
+
+\section{\Large{Development Environment}}
+\begin{enumerate}[label=\arabic*.]
+    \item {\large{Choice of software development platform}} \\
+    \begin{enumerate}[label=\alph*.]
+        \item {\large{Development platform}} \\
+        \begin{enumerate}[label=\roman*.]
+            \item {\large{Windows 11: Windows 11 is the latest release version of the Windows Operating System (OS). The features have been upgraded from the previous version. It is a very common OS due to its popularity. This leads to ease of collaboration and compatibility with other organizations. }} \\
+            \item {\large{macOS Monterey(V12): macOS Monterey is a Unix-based OS developed by Apple, exclusively for Mac. This OS is secure compared to Windows’. In addition, it allows the users to run multiple workspaces meaning the degree of multi-programming and multi-processing is extremely high. Finally, the software and hardware integration results in optimized performance. }} \\
+            \item {\large{Linux Ubuntu server 20.04:  It is an OS based on Linux, created primarily for managing servers. It is used on account of simplicity and effectiveness. Linux Ubuntu server handles duties like web traffic and file storage. Also, it enables collaboration with the latest tool such as Rust, Ruby, Go, and Php. }} \\
+            \item {\large{SQlite(v.3.31.1): It is a popular light-weight relational database. SQlite can cooperate concurrently with Django (python) server. By directly accessing the database, handling the overall transactions of data and eliminating duplicated information can be done.}} \\
+            \item {\large{Firebase: Firebase is a mobile and web application development platform developed by Firebase, and acquired by google in 2014. Through firebase, it eases user login. It is a real-time database with a NoSQL cloud database format. Once these fire-based services are hosted in the cloud, developers can scale their apps without much effort.}} \\
+            \item {\large{Nave cloud: Naver Cloud is Naver's IT subsidiary that provides all of Naver's technologies and platforms as a cloud-based One-Stop service. It provides high-quality 'Naver Cloud Platform' services based on fast and stable IT infrastructure operation experience for Naver and many other services. It provides various services necessary for companies to build IT infrastructure. }} \\
+        \end{enumerate}
+        \item {\large{Language / Framework}} \\
+        \begin{enumerate}[label=\roman*.]
+            \item {\large{Python(V.3.9) / OpenCV}} \\
+            Python - Python is a programming language widely used in web applications, software development, data science, and machine learning because it is efficient and easy to learn. It can also be integrated with all types of systems. Specifically, it is able to work with various operating systems such as Windows, macOS, Linux, and Unix. \\
+            OpenCV - OpenCV is an abbreviation for Open Source Computer Vision. Computer vision refers to a series of images obtained by a camera. Computers recognize photographs and different forms with these matrix numbers. OpenCV takes this format and helps the computer to get meaningful information. OpenCV is an open-source library that can be used in image processing. Designed with an emphasis on real-time processing, it shows fast speed and efficiency. \\
+            \item {\large{Javascript (ES6) / React Native (9.1.3)}} \\
+            Javascript (ES6) - Javascript(JS) object-based language that can be embedded in an HTML document to add programming elements. It encourages fast development speed since it can be written and operated immediately within an HTML file. Also, because it operates in a web browser, it is not restricted by the operating system and can be developed in various environments. Using NodeJS, both the front end and the back end can be developed. \\
+            React Native (9.1.3) - React Native is a Javascript framework for creating native mobile apps that run on iOS and Android both. It does not need to separate code for different platforms. In other words, it is an open-source mobile application framework developed by Facebook. React Native communicates with Native Thread over native bridges, optimizing performance. \\
+        \end{enumerate}
+        \item {\large{Software}} \\
+        \begin{enumerate}[label=\roman*.]
+            \item {\large{Visual studio code(V.1.73.0): Code editor made by Microsoft for Windows, macOS, and Linux. It supports various programming languages like JS, Python and etc. Containing extremely convenient extensions such as react, redux, graphql, react-native snippets and etc, this code editor is used as the main code writer for the front-end and the back-end.}} \\
+            \item {\large{Xcode (14.0.1): Apple Integrated Development Environment(IDE) used to develop software on Mac for use on iOS, iPadOS, mac OS, and tvOS. Xcode has everything that the developer needs to develop, test, and deploy apps from anywhere on the Apple platform.}} \\
+            \item {\large{Android Studio (2021. 03. 01): IDE that is able to develop Android apps. Built for Android, it accelerates development and helps build top-of-the-line apps for all Android devices.}} \\
+            \item {\large{Git/GitHub: Code hosting platform version control and collaboration. GitHub is a repository hosting service for Git providing a web-based graphical interface. It enables group members to work together on a shared project. After creating a repository for a single project, splitting branches should be done. }} \\ \item {\large{Notion: All-in-one workspace for group members, containing note-taking features that help members of a group to cooperate. Notion is an application that provides notes, databases, boards, wikis, calendars, and notifications. Through Notion, creating technical blogs is possible. }} \\      
+        \end{enumerate}        
+    \end{enumerate}    
+    \item {\large{Software in use}} \\
+    “Google Calendar” controls users’ time by letting them schedule activities conveniently and sending reminders about upcoming events. A device notification is sent to the user 10 minutes before the schedule starts. “Norton Family” tracks a child’s location and shows the child’s history movement. Home Alone combined two applications on the market and added a new feature; location detection inside the house. It enables parents to detect the location of the child like “Norton Family” but inside the house in real-time. Moreover, similar to “Google Calendar”, Home Alone substitutes part of the parents’ roles by being a child’s personal scheduler. Our station alarms the kid about an upcoming schedule. \\
+    
+    \item {\large{Cost}} \\
+    
+        \begin{tabularx}{0.45\textwidth} { 
+        | >{\raggedright\arraybackslash}X 
+        | >{\raggedright\arraybackslash}X 
+        | >{\raggedright\arraybackslash}X 
+        | >{\raggedright\arraybackslash}X 
+        | >{\raggedright\arraybackslash}X | }
+        \hline
+        Name & Price & Quantity \\
+        \hline
+        Laptop & 1000 dollar & 4 \\
+        \hline
+        Naver Cloud motion recognition API & Approximately 1 dollar per 1000 tries &  N/A \\
+        \hline
+        Naver Cloud Face Recognition(CFR)API & Approx. 1 dollar per 1000 tries &  N/A \\
+        \hline
+        Server  & 1000 dollar &  1 \\
+        \hline
+        SMS sending Fee & Approx. 1 dollar per 150 message & N/A \\
+        \hline
+        \end{tabularx} \\ \\
+        \\Laptop is a must for development station. Application coding and the following building are done with the Laptop.\\
+        Naver Cloud motion recognition API is used for analyzing the target person’s pose; laying, sitting, standing.\\
+        Naver Cloud Face Recognition(CFR) API is used for analyzing the target person’s existence. CFR is implemented for accurate detection of which person is and how many people are in the house.\\
+        The server works for Back-end server. It will run Django for API and web server use.\\
+        SMS sending fee is required for alarming parents in an emergency situation. \\
+    
+    \item {\large{Task distribution}} \\
+    
+        \begin{tabularx}{0.45\textwidth} { 
+        | >{\raggedright\arraybackslash}X 
+        | >{\raggedright\arraybackslash}X | }
+        \hline
+        Name & Task  \\
+        \hline
+        Kim Donghyun  & design and front-end   \\
+        \hline
+        Kim Yosub  & project design and back-end   \\
+        \hline
+        Lee Youngseo  & AI and documentation   \\
+        \hline
+        Cho Seyeon  & research and back-end   \\
+        \hline
+        \end{tabularx} \\
+\end{enumerate}
+\section{\Large{Specification}}\\
+\begin{center}
+\normalsize{Application-side}\\
+\end{center}
+\begin{enumerate}[label=\arabic*.]
+    \item {\large{Landing page}} \\
+    When a user downloads our application and starts initially, the landing page is shown. Two things are presented on this page. The background will be colored whereas the other two things will be white. \\
+    \begin{enumerate}[label=\alph*.]
+        \item {\large{Logo}} \\
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.2]{images/logo.png}
+        \end{figure}    
+        First, Home Alone logo is placed in the middle of the page. \\
+        \item {\large{Loading status}} \\
+        Second, the progress of the loading status by a percentage out of 100 is located at the center bottom of the page. \\
+        \item {\large{Service agreements}} \\
+        When the loading is done, the percentage will be 100 percent and after that, service agreements are shown as a pop-up page. The pop-up accounts for 80 percent of the total screen size. Under the agreement text block, there will be a checkbox and if the user clicks it, a checkmark appears in the box. At the very bottom of the pop-up box, there’s a submit button. It’s gray color when check-box is not clicked meaning deactivated, and when user clicks checkbox, gets vibrant color meaning activated. Color may vary. Once the user agrees with the terms of service, this pop up will not appear again. In other words, these agreements will only be shown during the initial booting. \\
+    \end{enumerate}
+    
+    \item {\large{Tutorial page}} \\
+    After The tutorial page describes the initial instruction for the application. Its purpose is to get used to this application faster and easier. It includes descriptive pictures and descriptions of the application usage including key features of the application. \\
+    \item {\large{Login page}} \\
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.2]{images/login.png}
+    \end{figure}     
+    The login page is used for user certification. As this application deals with the child’s individual schedule, each and every child’s information must be stored based on the user’s account. \\
+    The login page includes the following: \\
+    \begin{enumerate}[label=\alph*.]
+        \item {\large{Title: title of this application}} \\
+        \item {\large{Explanation: “To use the service, please login!” is shown below the title. }} \\
+        \item {\large{Login with the Google Account button: Home Alone application has only one option which is to login using a Google account. By pressing this button, the page will eventually get connected to Google. Inside the Google page, the user can type the email address and password. If the user has forgotten the password, he or she would have to figure it out on the Google page. When successfully logging in using a Google account, the page will turn into the main page. }} \\
+    \end{enumerate}
+    \item {\large{Main page (Status page)}} \\
+    The main page shows the key data of the service. They are the kid’s current status as well as the schedule. The status page contains the title; HOME and two blocks. 
+    \begin{enumerate}[label=\alph*.]
+        \item {\large{Kid's current status}} \\
+        The kid’s current status block is located at the upper half of the page. It shows two statuses whether the kid is at home or not. \\
+        \begin{enumerate}[label=\roman*.]
+            \item {\large{IN: If he or she is at home, then the word ‘IN’ will be emphasized. Furthermore, it provides the location of the kid when the kid is in the house. For example, when the kid is in the living room, Under the IN/OUT icon, the location is shown as “living room” as a text.}} \\
+            \item {\large{OUT: In the opposite case, the word ‘OUT’ will be highlighted. }} \\
+        \end{enumerate}
+        \item {\large{Kid’s schedule}} \\
+        The kid’s schedule status block is located at the lower half of the page. This block is divided into three parts. \\
+        \begin{enumerate}[label=\roman*.]
+            \item {\large{The time remaining until the most immediate schedule}} \\
+            The unit of time is minute until 59 minutes, and time over 60minutes is shown as one hour. Minutes don’t count as an hour, for example, 16 minutes in 76 minutes, are discarded. So 76 minutes are shown as one hour.
+            \item {\large{The place where the schedule is taken}}
+            \item {\large{The starting time of the next event}}\\
+        \end{enumerate}
+        For example, let’s say the time is now 7’o clock and school begins at 8’o clock. Then the time remaining will be 60 minutes. \\
+        Three things will be shown which are: \\
+        \begin{enumerate}[label=\roman*.]
+            \item {\large{60 minutes (Time remaining)}} 
+            \item {\large{School (The place)}}
+            \item {\large{08:00 (The starting time of the next event)}}\\
+        \end{enumerate}  
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.2]{images/main - status_ outside.png}
+        \end{figure} 
+        \item {\large{Footer}} \\
+        In the footer, there are three buttons; home, schedule, and configuration. Home is the current status whereas the schedule is the button to move to the schedule managing page. Clicking the configuration button redirects to the configuration page. It is represented with a gear wheel icon. This page includes four blocks. \\
+        \begin{enumerate}[label=\roman*.]
+            \item {\large{Profile}} \\
+            The text “Hello, “ + username + “!” is written and right next to the exclamation mark, there is a random profile picture. If the user clicks the picture, the pop-up will occur. From 12 photos, the user can pick and use one. There will be X button to close the pop-up.
+            \item {\large{Setting}}\\
+            The setting includes a few swipeable buttons. It includes version change between kid mode and elderly mode, profile change, and room whitelist update. This list represents rooms that out service applies. 
+            \item {\large{Help}}\\
+            This shows the tutorial of the page.
+            \item {\large{Logout}}\\
+            Represented with an open door icon, the footer has a logout function. \\
+            \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.2]{images/setting.png}
+            \end{figure} 
+            \end{enumerate}            
+    \end{enumerate}
+    \item {\large{Schedule managing page}} \\
+    This page is designed in order to display the kid’s schedules. Adding schedules and deleting schedules are the two most important functions on this page. This page includes the following: \\
+    \begin{enumerate}[label=\alph*.]
+        \item {\large{Schedule add button: This button is for adding a new schedule. This button uses plus sign. If user click the button, schedule add pop-up screen appears. pop-up screen consists of three fields and three buttons.}} \\
+        \begin{enumerate}[label=\roman*.]
+            \item {\large{Field 1: Title of the schedule (string)}} 
+            \item {\large{Field 2: Starting/end time of the schedule (timestamp)}} 
+            \item {\large{Field 3: Location of the schedule (string)}} 
+            \item {\large{Button 1, 2: Buttons to choose whether the location of the schedule is inside or outside the house}} 
+            \item {\large{Button 3: Button named as “add” whose background color is gray when it’s deactivated, and colored when all 3 fields are fulfilled}} \\            
+        \end{enumerate}
+        \item {\large{Schedule table: This table is located at the very center of the page. The table describes the overall outline of the kid’s schedule in form of weekly time table. Thus, it will be represented in row and column format. Its column represents every day of the week and the row represents the time, which is segmented into an hour per block. }} \\
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.2]{images/schedule.png}
+        \end{figure} 
+        \item {\large{Modify Schedule: When clicking the schedule, the bottom sheet menu pops up. It includes the date, starting time, finishing time, the title of the event, the location and the two buttons; modify and delete.}} \\      
+        \begin{enumerate}[label=\roman*.]
+            \item {\large{Modify button: When clicking it, it leads to the modify pop-up. This is similar to the schedule add pop-up. The only difference is that the modify pop-up is already filled with the original schedule and has a different title. The user only has to change what he or she need to change.}} \\
+            \item {\large{Delete button: When clicking Delete button, it asks if you really want to delete the schedule with pop-up message. If user clicks “cancel”, written in the gray box, user return to exiting pop-up. Or if user clicks “delete”, written in redbox, schedule is ultimately deleted and the schedule table will no longer contain that schedule.}} \\
+        \end{enumerate}
+    \end{enumerate}
+    
+\begin{center}
+\normalsize{Server-side}\\
+\end{center}
+
+\begin{enumerate}[label=\arabic*.]
+    \item {\large{Web server}} \\
+    A web server consists of a single page with one button, the alarm stop button. Here is the step of how the button works. If the user clicks the button, the sound playing by the alarm stops. \\
+    \item {\large{API server}} \\
+    API server sends data needed for the application and AI speaker response. Therefore, API server should be able to respond the followings: \\
+    \begin{enumerate}[label=\alph*.]
+        \item {\large{Boolean Is\textunderscore kid\textunderscore home}} \\
+        There are two available state which are True and False. If the kid is at home, the AI speaker will send True. Else, if the kid is not at home, the AI speaker will send False. \\
+        \item {\large{Str Where\textunderscore is\textunderscore kid}} \\
+        Many states are available in this case. The kid can be located in his or her room (which will be the kid’s room), living room, kitchen, parents’ room, and so on. \\
+        \item {\large{Str Is\textunderscore kid\textunderscore ready}} \\
+        Home Alone divides the kid’s status chiefly into three states. They are standing, sitting, and laying. 0 stands for standing, 1 stands for sitting and 2 stands for laying. When the schedule is right around the corner and the kid’s status is 0, it means that the kid is not ready for the upcoming event. Thus, to check whether the kid is ready or not, JSON schedule’s data is necessary. Moreover, to distinguish the users, userid variable in integer is required. With this userid, each user can be identified and the schedule can be personalized. \\
+    \end{enumerate}
+\end{enumerate}
+
+
+\end{enumerate}
+\begin{thebibliography}{00}
+\bibitem{b1} Statistics KOREA Government Official Work Conference, 합계출산율 - 국가지표체계. Retrieved October 21, 2022, from (https://www.index.go.kr/)
+
+\bibitem{b2} Statistics Korea. 저출산의 원인. Retrieved October 21, 2022, from (https://kosis.kr/))
+\bibitem{b3} West Seoul Supreme Prosecutor Office. Status of child abduction - Crime analysis. Retrieved October 16, 2022, from (https://www.spo.go.kr/site/westseoul/crimeAnalysis.do)
+\end{thebibliography}
+
+\end{document}
