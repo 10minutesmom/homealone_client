@@ -6,15 +6,11 @@ import ProfileBox from '../../components/molecules/ProfileBox';
 import profile from '../../asset/images/profile.jpeg';
 import Menu from '../../components/molecules/Menu';
 
-const SettingPresenter = listItem => {
+const SettingPresenter = ({userName, userEmail, listItem}) => {
   return (
     <Container>
       <Header marginBottom={48}>SETTING</Header>
-      <ProfileBox
-        source={profile}
-        name={'김동현'}
-        email={'lmkn5342@gmail.com'}
-      />
+      <ProfileBox source={profile} name={userName} email={userEmail} />
       <View style={styles.menu}>
         <Menu listItem={listItem} />
       </View>

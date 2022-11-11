@@ -13,12 +13,14 @@ const DailyScheduleMatrix = ({width, day, dailyData, onPress}) => {
 
       {dailyData.map((item, dayIndex) => {
         return (
-          <View>
+          <View key={dayIndex}>
             {item.map((e, i) => {
-              return <Box width={width} day={day} index={dayIndex || i} />;
+              return (
+                <Box key={i} width={width} day={day} index={dayIndex || i} />
+              );
             })}
             {item[0] != 0 ? (
-              <View style={styles(day, dayIndex).box}>
+              <View key={dayIndex} style={styles(day, dayIndex).box}>
                 <ScheduleBox
                   hour={item.length}
                   width={width}

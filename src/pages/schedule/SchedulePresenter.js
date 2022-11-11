@@ -60,17 +60,18 @@ const SchedulePresenter = ({
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.schedule}>
           <View style={styles.time}>
-            {time.map(item => {
+            {time.map((item, index) => {
               return (
-                <Text size="small" color="grey" marginBottom={26}>
+                <Text key={index} size="small" color="grey" marginBottom={26}>
                   {item}
                 </Text>
               );
             })}
           </View>
-          {day.map(item => {
+          {day.map((item, index) => {
             return (
               <DailyScheduleMatrix
+                key={index}
                 width={Dimensions.get('window').width - 64}
                 day={item}
                 dailyData={data}

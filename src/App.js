@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import Navigator from './navigators/Navigator';
+import React, {useEffect} from 'react';
 import {PortalProvider} from '@gorhom/portal';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
-import Login from './pages/login/LoginContainer';
+import {Provider} from 'react-redux';
+import store from './redux/store';
+import Auth from './utils/Auth';
 
 const App = () => {
-  const [isLogggedIn, setIsLogggedIn] = useState(false);
   const googleSigninConfigure = () => {
     GoogleSignin.configure({
       webClientId:
@@ -14,25 +13,16 @@ const App = () => {
     });
   };
 
-  const checkLoggedIn = () => {
-    auth().onAuthStateChanged(user => {
-      if (user) {
-        setIsLogggedIn(true);
-        console.log('loggedIn');
-      } else {
-        setIsLogggedIn(false);
-        console.log('loggedOut');
-      }
-    });
-  };
-
   useEffect(() => {
     googleSigninConfigure();
-    checkLoggedIn();
   }, []);
 
   return (
-    <PortalProvider>{isLogggedIn ? <Navigator /> : <Login />}</PortalProvider>
+    <Provider store={store}>
+      <PortalProvider>
+        <Auth />
+      </PortalProvider>
+    </Provider>
   );
 };
 

@@ -4,13 +4,13 @@ import Text from '../atoms/Text';
 import Icon from '../atoms/Icon';
 import right_arrow_icon from '../../asset/images/right_arrow_icon.png';
 
-const menu = listItem => {
+const menu = ({listItem}) => {
   return (
     <View style={styles.menu}>
       <Text size="regular" color="black" weight="bold" marginBottom={20}>
         Account
       </Text>
-      {listItem.listItem.listItem.map((item, index) => {
+      {listItem.map((item, index) => {
         return (
           <TouchableOpacity key={index} onPress={() => item.method()}>
             <View style={styles.item}>
