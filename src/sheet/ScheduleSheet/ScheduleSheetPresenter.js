@@ -3,10 +3,12 @@ import {View, StyleSheet} from 'react-native';
 import Text from '../../components/atoms/Text';
 import TextWithIcon from '../../components/molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
+import clock_icon from '../../asset/images/clock_icon.png';
 import Button from '../../components/molecules/Button';
 
 const ScheduleSheetPresenter = props => {
-  const {day, time, title, type, location, onPress} = props;
+  const {day, time, title, type, location, readyTime, movingTime, onPress} =
+    props;
   return (
     <View style={styles.sheet}>
       <View style={styles.bar} />
@@ -18,20 +20,18 @@ const ScheduleSheetPresenter = props => {
           {time}
         </Text>
         <View style={styles.textBox}>
-          <Text
-            size="regular"
-            color="black"
-            weight="bold"
-            marginBottom={16}
-            marginRight={8}>
+          <Text size="regular" color="black" weight="bold" marginRight={8}>
             {title}
           </Text>
           <Text size="small" color="grey">
             {type}
           </Text>
         </View>
-        <TextWithIcon source={location_icon} marginBottom={22}>
+        <TextWithIcon source={location_icon} marginBottom={6}>
           {location}
+        </TextWithIcon>
+        <TextWithIcon source={clock_icon} marginBottom={22}>
+          {`준비시간: ${readyTime}, 이동시간: ${movingTime}`}
         </TextWithIcon>
         <View style={styles.buttons}>
           <View style={{marginRight: 8}}>
@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
   },
   textBox: {
     flexDirection: 'row',
+    alignItems: 'flex-end',
+    marginBottom: 16,
   },
   buttons: {
     flexDirection: 'row',

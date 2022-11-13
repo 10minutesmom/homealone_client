@@ -1,0 +1,189 @@
+{
+    "timetable": {
+      "12": {
+        "0": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "10": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "20": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "Safety Margin"
+        },
+  
+        "30": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "Safety Margin"
+        },
+  
+        "40": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "50": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "Need to Ready"
+        }
+      },
+      "1": {
+        "0": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "Need to Ready"
+        },
+  
+        "10": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "Need to Ready"
+        },
+  
+        "20": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "move"
+        },
+  
+        "30": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "move"
+        },
+  
+        "40": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "move"
+        },
+  
+        "50": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "pause"
+        }
+      },
+      "2": {
+        "0": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "pause"
+        },
+  
+        "10": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "pause"
+        },
+  
+        "20": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "30": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "40": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "50": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        }
+      },
+      "21": {
+        "0": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "pause"
+        },
+  
+        "10": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "pause"
+        },
+  
+        "20": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "30": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "40": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "50": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        }
+      },
+      "22": {
+        "0": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "pause"
+        },
+  
+        "10": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "pause"
+        },
+  
+        "20": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "30": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "40": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        },
+  
+        "50": {
+          "Title": "title",
+          "Location": "HOME",
+          "stage": "no schedule"
+        }
+      }
+    }
+  }

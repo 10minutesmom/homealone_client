@@ -5,8 +5,8 @@ import Text from '../atoms/Text';
 
 const TextWithIcon = ({source, marginBottom, size, children}) => {
   return (
-    <View style={styles(marginBottom).textWithIcon}>
-      <View style={styles(marginBottom).icon}>
+    <View style={styles(marginBottom, size == 'small').textWithIcon}>
+      <View style={styles(marginBottom, size == 'small').icon}>
         <Icon size={size == 'small' ? 'small' : 'medium'} source={source} />
       </View>
       <Text size={size == 'small' ? 'small' : 'medium'} color="black">
@@ -16,14 +16,14 @@ const TextWithIcon = ({source, marginBottom, size, children}) => {
   );
 };
 
-const styles = margin =>
+const styles = (margin, small) =>
   StyleSheet.create({
     textWithIcon: {
       flexDirection: 'row',
       marginBottom: margin,
     },
     icon: {
-      marginRight: 10,
+      marginRight: small ? 2 : 10,
     },
   });
 

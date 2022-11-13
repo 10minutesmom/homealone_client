@@ -39,8 +39,18 @@ const ScheduleModalPresenter = ({
       />
       <Input
         hint="장소"
-        marginBottom={32}
+        marginBottom={20}
         value={scheduleData != undefined ? scheduleData['location'] : ''}
+      />
+      <Input
+        hint="준비 시간"
+        marginBottom={20}
+        value={scheduleData != undefined ? scheduleData['readyTime'] : ''}
+      />
+      <Input
+        hint="이동 시간"
+        marginBottom={32}
+        value={scheduleData != undefined ? scheduleData['movingTime'] : ''}
       />
       <Text size="small" color="black" fixHeight={30} marginBottom={10}>
         집안에서의 일정인지 집 밖에서의 일정인지{'\n'}선택해수세요!{' '}
@@ -71,7 +81,7 @@ const ScheduleModalPresenter = ({
 const styles = StyleSheet.create({
   modal: {
     width: 300,
-    height: 450,
+    height: 552,
     paddingHorizontal: 22,
     justifyContent: 'center',
     backgroundColor: '#F4F4F4',

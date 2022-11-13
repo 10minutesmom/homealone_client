@@ -95,6 +95,8 @@ const SchedulePresenter = ({
                 title="학교가기"
                 type="내부일정"
                 location="한양대학교"
+                readyTime="30분"
+                movingTime="1시간"
                 onPress={openDialog}
               />
             );
