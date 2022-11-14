@@ -4,23 +4,23 @@ import Text from '../atoms/Text';
 import TextWithIcon from '../molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
 
-const ScheduleBox = ({hour, width, title, subTitle, location, onPress}) => {
+const ScheduleBox = ({hour, width, data, day, time, onPress}) => {
   return (
-    <TouchableOpacity onPress={() => onPress()}>
+    <TouchableOpacity onPress={() => onPress(data, day, time, hour)}>
       <View style={boxStyle(hour, width).scheduleBox}>
         <View style={styles.textBox}>
           <Text size="medium" color="black" marginBottom={2}>
-            {title}
+            {data['title']}
           </Text>
           {hour >= 2 ? (
             <Text size="small" color="grey">
-              {subTitle}
+              {data['scheduleType']}
             </Text>
           ) : null}
         </View>
         <View style={styles.icon}>
           <TextWithIcon source={location_icon} size="small">
-            {location}
+            {data['location']}
           </TextWithIcon>
         </View>
       </View>

@@ -1,7 +1,9 @@
 import React from 'react';
 import ScheduleSheetPresenter from './ScheduleSheetPresenter';
 
-const ScheduleSheetContainer = props => {
+const ScheduleSheetContainer = ({data, onPress}) => {
+  const props = {data, onPress};
+  // console.log(data);
   return <ScheduleSheetPresenter {...props}></ScheduleSheetPresenter>;
 };
 

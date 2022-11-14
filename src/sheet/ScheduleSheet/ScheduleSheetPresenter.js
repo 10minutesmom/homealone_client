@@ -6,32 +6,30 @@ import location_icon from '../../asset/images/location_icon.png';
 import clock_icon from '../../asset/images/clock_icon.png';
 import Button from '../../components/molecules/Button';
 
-const ScheduleSheetPresenter = props => {
-  const {day, time, title, type, location, readyTime, movingTime, onPress} =
-    props;
+const ScheduleSheetPresenter = ({data, onPress}) => {
   return (
     <View style={styles.sheet}>
       <View style={styles.bar} />
       <View>
         <Text size="big" color="black" marginBottom={8}>
-          {day}
+          {data['day']}
         </Text>
         <Text size="big" color="black" weight="bold" marginBottom={34}>
-          {time}
+          {data['time']}
         </Text>
         <View style={styles.textBox}>
           <Text size="regular" color="black" weight="bold" marginRight={8}>
-            {title}
+            {data['title']}
           </Text>
           <Text size="small" color="grey">
-            {type}
+            {data['scheduleType']}
           </Text>
         </View>
         <TextWithIcon source={location_icon} marginBottom={6}>
-          {location}
+          {data['location']}
         </TextWithIcon>
         <TextWithIcon source={clock_icon} marginBottom={22}>
-          {`준비시간: ${readyTime}, 이동시간: ${movingTime}`}
+          {`준비시간: ${data['readyTime']}분, 이동시간: ${data['movingTime']}분`}
         </TextWithIcon>
         <View style={styles.buttons}>
           <View style={{marginRight: 8}}>
@@ -57,6 +55,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 46,
     justifyContent: 'center',
     alignItems: 'center',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
   textBox: {
     flexDirection: 'row',

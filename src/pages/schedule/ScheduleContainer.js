@@ -4,8 +4,9 @@ import Animated from 'react-native-reanimated';
 import data from '../../dummy_data/scheduleData.json';
 
 const ScheduleContainer = () => {
-  const sheetRef = useRef(null);
-  const modalRef = useRef(0);
+  const [sheetData, setSheetData] = useState({});
+  const modalRef = useRef(null);
+  const [sheetVisible, setSheetVisible] = useState(false);
   const modifyDataRef = useRef({});
   const day = ['mon', 'tue', 'wed', 'thu', 'fri'];
   const tableTime = [
@@ -35,7 +36,6 @@ const ScheduleContainer = () => {
     '11pm',
     '12am',
   ];
-  const fall = useRef(new Animated.Value(1)).current;
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
   const [scheduleData, setScheduleData] = useState([]);
 
@@ -65,25 +65,23 @@ const ScheduleContainer = () => {
     return dayArray;
   };
 
-  const animatedShadowOpacity = fall.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.5, 0],
-  });
-
-  const openSheet = useCallback(() => {
-    sheetRef.current.snapTo(0);
+  const openSheet = useCallback((data, day, time, hour) => {
+    const assingedTime = `${tableTime[time - hour]} ~ ${tableTime[time]}`;
+    const assignedData = Object.assign(data, {time: assingedTime, day: day});
+    setSheetData(Object.assign(sheetData, assignedData));
+    setSheetVisible(true);
   }, []);
 
   const openDialog = useCallback((id, ...props) => {
-    sheetRef.current.snapTo(1);
+    setSheetVisible(false);
     modalRef.current = id;
     modifyDataRef.current = props;
     setIsVisibleDialog(true);
-  });
+  }, []);
 
   const closeDialog = useCallback(() => {
     setIsVisibleDialog(false);
-  });
+  }, []);
 
   useEffect(() => {
     setScheduleData([...createSchedule()]);
@@ -91,17 +89,17 @@ const ScheduleContainer = () => {
 
   const props = {
     openSheet: openSheet,
-    animatedShadowOpacity: animatedShadowOpacity,
     openDialog: openDialog,
     closeDialog: closeDialog,
-    fall,
-    sheetRef,
+    setModalVisible: setSheetVisible,
+    sheetData,
     modalRef,
     modifyDataRef,
     isVisibleDialog,
     day,
     tableTime,
     scheduleData,
+    sheetVisible,
   };
   return <SchedulePresenter {...props} />;
 };

@@ -6,27 +6,25 @@ import add from '../../asset/images/add_icon.png';
 import Text from '../../components/atoms/Text';
 import {Dimensions} from 'react-native';
 import DailyScheduleMatrix from '../../components/molecules/DailyScheduleMatrix';
-import BottomSheet from 'reanimated-bottom-sheet';
-import ScheduleSheetContainer from '../../sheet/ScheduleSheet/ScheduleSheetContainer';
 import {Portal} from '@gorhom/portal';
-import Animated from 'react-native-reanimated';
 import Dialog from 'react-native-popup-dialog';
 import ScheduleModal from '../../modal/schedule/ScheduleModalContainer';
 import BasicModal from '../../modal/basic/BasicModalContainer';
+import BottomSheet from '../../sheet/BottomSheet';
 
 const SchedulePresenter = ({
   openSheet,
-  animatedShadowOpacity,
   openDialog,
   closeDialog,
-  fall,
-  sheetRef,
+  setModalVisible,
+  sheetData,
   modalRef,
   modifyDataRef,
   isVisibleDialog,
   day,
   tableTime,
   scheduleData,
+  sheetVisible,
 }) => {
   return (
     <Container color="white">
@@ -59,37 +57,12 @@ const SchedulePresenter = ({
       </ScrollView>
       <Portal>
         <BottomSheet
-          ref={sheetRef}
-          snapPoints={[312, 0]}
-          borderRadius={30}
-          callbackNode={fall}
-          renderContent={() => {
-            return (
-              <ScheduleSheetContainer
-                day="월요일"
-                time="10:00~10:00"
-                title="학교가기"
-                type="내부일정"
-                location="한양대학교"
-                readyTime="30분"
-                movingTime="1시간"
-                onPress={openDialog}
-              />
-            );
-          }}
-          initialSnap={1}
+          modalVisible={sheetVisible}
+          setModalVisible={setModalVisible}
+          data={sheetData}
+          onPress={openDialog}
         />
       </Portal>
-      <Animated.View
-        pointerEvents="none"
-        style={[
-          {
-            ...StyleSheet.absoluteFillObject,
-            backgroundColor: '#000',
-            opacity: animatedShadowOpacity,
-          },
-        ]}
-      />
       <Dialog visible={isVisibleDialog} onTouchOutside={() => closeDialog()}>
         {modalRef.current == 0 ? (
           <ScheduleModal close={closeDialog} data={modifyDataRef} />
