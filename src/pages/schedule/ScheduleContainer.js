@@ -72,10 +72,10 @@ const ScheduleContainer = () => {
     setSheetVisible(true);
   }, []);
 
-  const openDialog = useCallback((id, ...props) => {
+  const openDialog = useCallback((id, data) => {
     setSheetVisible(false);
     modalRef.current = id;
-    modifyDataRef.current = props;
+    modifyDataRef.current = data;
     setIsVisibleDialog(true);
   }, []);
 

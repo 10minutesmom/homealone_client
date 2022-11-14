@@ -11,7 +11,7 @@ const ScheduleModalPresenter = ({
   scheduleType,
   close,
   title,
-  scheduleData,
+  data,
 }) => {
   return (
     <View style={styles.modal}>
@@ -26,31 +26,27 @@ const ScheduleModalPresenter = ({
       <Input
         hint="일정이름"
         marginBottom={20}
-        value={scheduleData != undefined ? scheduleData['title'] : ''}
+        value={data != undefined ? data.title : ''}
       />
       <Input
         hint="요일 및 시간"
         marginBottom={20}
-        value={
-          scheduleData != undefined
-            ? scheduleData['day'] + ' ' + scheduleData['time']
-            : ''
-        }
+        value={data != undefined ? data.day + ' ' + data.time : ''}
       />
       <Input
         hint="장소"
         marginBottom={20}
-        value={scheduleData != undefined ? scheduleData['location'] : ''}
+        value={data != undefined ? data.location : ''}
       />
       <Input
         hint="준비 시간"
         marginBottom={20}
-        value={scheduleData != undefined ? scheduleData['readyTime'] : ''}
+        value={data != undefined ? data.readyTime.toString() + '분' : ''}
       />
       <Input
         hint="이동 시간"
         marginBottom={32}
-        value={scheduleData != undefined ? scheduleData['movingTime'] : ''}
+        value={data != undefined ? data.movingTime.toString() + '분' : ''}
       />
       <Text size="small" color="black" fixHeight={30} marginBottom={10}>
         집안에서의 일정인지 집 밖에서의 일정인지{'\n'}선택해수세요!{' '}

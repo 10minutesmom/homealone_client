@@ -2,7 +2,6 @@ import React, {useEffect, useRef} from 'react';
 import {
   View,
   StyleSheet,
-  Text,
   Modal,
   Animated,
   TouchableWithoutFeedback,
@@ -56,7 +55,6 @@ const BottomSheet = props => {
   }, [props.modalVisible]);
 
   const closeModal = () => {
-    console.log('check');
     closeBottomSheet.start(() => {
       setModalVisible(false);
     });

@@ -65,7 +65,7 @@ const SchedulePresenter = ({
       </Portal>
       <Dialog visible={isVisibleDialog} onTouchOutside={() => closeDialog()}>
         {modalRef.current == 0 ? (
-          <ScheduleModal close={closeDialog} data={modifyDataRef} />
+          <ScheduleModal close={closeDialog} data={modifyDataRef.current} />
         ) : (
           <BasicModal close={closeDialog} />
         )}

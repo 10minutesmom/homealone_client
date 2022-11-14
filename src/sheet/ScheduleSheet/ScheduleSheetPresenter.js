@@ -33,7 +33,7 @@ const ScheduleSheetPresenter = ({data, onPress}) => {
         </TextWithIcon>
         <View style={styles.buttons}>
           <View style={{marginRight: 8}}>
-            <Button border={true} width={132} onPress={() => onPress(0, props)}>
+            <Button border={true} width={132} onPress={() => onPress(0, data)}>
               수정하기
             </Button>
           </View>
