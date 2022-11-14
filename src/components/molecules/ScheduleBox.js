@@ -12,9 +12,11 @@ const ScheduleBox = ({hour, width, title, subTitle, location, onPress}) => {
           <Text size="medium" color="black" marginBottom={2}>
             {title}
           </Text>
-          <Text size="small" color="grey">
-            {subTitle}
-          </Text>
+          {hour >= 2 ? (
+            <Text size="small" color="grey">
+              {subTitle}
+            </Text>
+          ) : null}
         </View>
         <View style={styles.icon}>
           <TextWithIcon source={location_icon} size="small">

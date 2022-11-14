@@ -24,34 +24,10 @@ const SchedulePresenter = ({
   modalRef,
   modifyDataRef,
   isVisibleDialog,
+  day,
+  tableTime,
+  scheduleData,
 }) => {
-  const day = ['mon', 'tue', 'wed', 'thu', 'fri'];
-  const time = [
-    '12am',
-    '1am',
-    '2am',
-    '12am',
-    '1am',
-    '2am',
-    '12am',
-    '1am',
-    '2am',
-    '12am',
-    '1am',
-    '2am',
-    '12am',
-    '1am',
-    '2am',
-    '12am',
-    '1am',
-    '2am',
-  ];
-  const data = [
-    [1, 1, 1, 1],
-    [0, 0],
-    [1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  ];
   return (
     <Container color="white">
       <Header source={add} marginBottom={42} onPress={openDialog}>
@@ -60,7 +36,7 @@ const SchedulePresenter = ({
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.schedule}>
           <View style={styles.time}>
-            {time.map((item, index) => {
+            {tableTime.map((item, index) => {
               return (
                 <Text key={index} size="small" color="grey" marginBottom={26}>
                   {item}
@@ -68,13 +44,13 @@ const SchedulePresenter = ({
               );
             })}
           </View>
-          {day.map((item, index) => {
+          {scheduleData.map((item, index) => {
             return (
               <DailyScheduleMatrix
                 key={index}
                 width={Dimensions.get('window').width - 64}
-                day={item}
-                dailyData={data}
+                day={day[index]}
+                dailyData={item}
                 onPress={openSheet}
               />
             );
