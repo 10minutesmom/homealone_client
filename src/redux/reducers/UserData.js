@@ -2,11 +2,11 @@ export const SET_USER = 'SET_USER';
 
 export const setUser = user => ({type: SET_USER, user});
 
-const initalState = {
+const initialState = {
   user: {},
 };
 
-const userData = (state = initalState, action) => {
+const UserData = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
       return {
@@ -19,4 +19,4 @@ const userData = (state = initalState, action) => {
   }
 };
 
-export default userData;
+export default UserData;

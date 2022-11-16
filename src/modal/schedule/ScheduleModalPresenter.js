@@ -8,10 +8,12 @@ import Button from '../../components/molecules/Button';
 
 const ScheduleModalPresenter = ({
   changeScheduleType,
+  handleChange,
   scheduleType,
   close,
   title,
   data,
+  inputs,
 }) => {
   return (
     <View style={styles.modal}>
@@ -26,7 +28,9 @@ const ScheduleModalPresenter = ({
       <Input
         hint="일정이름"
         marginBottom={20}
-        value={data != undefined ? data.title : ''}
+        value={inputs.title}
+        name="title"
+        handle={handleChange}
       />
       <Input
         hint="요일 및 시간"
@@ -36,7 +40,9 @@ const ScheduleModalPresenter = ({
       <Input
         hint="장소"
         marginBottom={20}
-        value={data != undefined ? data.location : ''}
+        value={inputs.location}
+        name="location"
+        handle={handleChange}
       />
       <Input
         hint="준비 시간"
@@ -81,6 +87,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 22,
     justifyContent: 'center',
     backgroundColor: '#F4F4F4',
+    position: 'absolute',
+    top: 100,
   },
   header: {
     flexDirection: 'row',

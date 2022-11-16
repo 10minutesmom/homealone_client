@@ -1,13 +1,13 @@
 import React from 'react';
-import {View, TextInput, StyleSheet, ShadowPropTypesIOS} from 'react-native';
+import {View, TextInput, StyleSheet} from 'react-native';
 
-const Input = ({hint, marginBottom, value, handle}) => {
+const Input = ({hint, marginBottom, value, name, handle}) => {
   return (
     <TextInput
       style={styles(marginBottom).input}
       placeholder={hint}
       value={value}
-      onChangeText={() => handle()}
+      onChangeText={text => handle({text, name})}
     />
   );
 };

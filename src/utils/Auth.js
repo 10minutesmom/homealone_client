@@ -3,7 +3,7 @@ import auth from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux';
 import Login from '../pages/login/LoginContainer';
 import Navigator from '../navigators/Navigator';
-import {setUser} from '../redux/userData';
+import {setUser} from '../redux/reducers/UserData';
 
 const Auth = () => {
   const [isLogggedIn, setIsLogggedIn] = useState(false);

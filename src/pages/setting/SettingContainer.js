@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React from 'react';
+import {useSelector} from 'react-redux';
 import SettingPresenter from './SettingPresenter';
 import auth from '@react-native-firebase/auth';
 
 const SettingContainer = () => {
-  const {user} = useSelector(state => state.userData);
+  const {user} = useSelector(state => state.UserData);
   const userName = user.displayName;
   const userEmail = user.email;
 

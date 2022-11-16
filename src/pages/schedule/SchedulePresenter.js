@@ -11,6 +11,7 @@ import Dialog from 'react-native-popup-dialog';
 import ScheduleModal from '../../modal/schedule/ScheduleModalContainer';
 import BasicModal from '../../modal/basic/BasicModalContainer';
 import BottomSheet from '../../sheet/BottomSheet';
+import {Provider, ReactReduxContext} from 'react-redux';
 
 const SchedulePresenter = ({
   openSheet,
@@ -63,13 +64,16 @@ const SchedulePresenter = ({
           onPress={openDialog}
         />
       </Portal>
-      <Dialog visible={isVisibleDialog} onTouchOutside={() => closeDialog()}>
+      {/* <Dialog visible={isVisibleDialog} onTouchOutside={() => closeDialog()}>
         {modalRef.current == 0 ? (
           <ScheduleModal close={closeDialog} data={modifyDataRef.current} />
         ) : (
           <BasicModal close={closeDialog} />
         )}
-      </Dialog>
+      </Dialog> */}
+      {isVisibleDialog ? (
+        <ScheduleModal close={closeDialog} data={modifyDataRef.current} />
+      ) : null}
     </Container>
   );
 };
