@@ -7,6 +7,10 @@ const ScheduleModalContainer = ({close, data}) => {
   let title = data != undefined ? '수정하기' : '추가하기';
   const dispatch = useDispatch();
 
+  const [show, setShow] = useState({
+    startTime: false,
+    endTime: false,
+  });
   const [scheduleType, setScheduleType] = useState(
     data != undefined ? data.scheduleType : 'inside',
   );
@@ -17,6 +21,8 @@ const ScheduleModalContainer = ({close, data}) => {
     day: '',
     readyTime: '',
     movingTime: '',
+    startTime: new Date(),
+    endTime: new Date(),
   });
 
   useEffect(() => {
@@ -54,6 +60,17 @@ const ScheduleModalContainer = ({close, data}) => {
     console.log(e);
   };
 
+  const onTimeChange = e => {
+    const {value, name} = e;
+
+    setValues({
+      ...values,
+      [name]: value,
+    });
+
+    if (show[name] === false) setShow({...show, [name]: true});
+  };
+
   const changeScheduleType = useCallback(type => {
     setScheduleType(type);
   }, []);
@@ -62,11 +79,12 @@ const ScheduleModalContainer = ({close, data}) => {
     changeScheduleType: changeScheduleType,
     onTextChange: onTextChange,
     onPickerItemChange: onPickerItemChange,
+    onTimeChange: onTimeChange,
     close: close,
     scheduleType,
     title,
-    data,
     values,
+    show,
   };
   return <ScheduleModalPresenter {...props} />;
 };

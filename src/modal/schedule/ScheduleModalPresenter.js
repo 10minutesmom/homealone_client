@@ -12,11 +12,12 @@ const ScheduleModalPresenter = ({
   changeScheduleType,
   onTextChange,
   onPickerItemChange,
+  onTimeChange,
   scheduleType,
   close,
   title,
-  data,
   values,
+  show,
 }) => {
   return (
     <View style={styles.modal}>
@@ -48,6 +49,12 @@ const ScheduleModalPresenter = ({
         ]}
         value={values.day}
         handle={onPickerItemChange}
+      />
+      <TimePicker
+        marginBottom={20}
+        value={values}
+        handle={onTimeChange}
+        show={show}
       />
       <Input
         hint="장소"
@@ -115,11 +122,12 @@ const ScheduleModalPresenter = ({
 const styles = StyleSheet.create({
   modal: {
     width: 300,
-    height: 552,
+    height: 612,
     paddingHorizontal: 22,
     justifyContent: 'center',
     backgroundColor: '#F4F4F4',
     position: 'absolute',
+    borderRadius: 12,
     top: 100,
   },
   header: {
