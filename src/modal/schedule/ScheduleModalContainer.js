@@ -5,36 +5,54 @@ import {changeInput} from '../../redux/reducers/Input';
 
 const ScheduleModalContainer = ({close, data}) => {
   let title = data != undefined ? '수정하기' : '추가하기';
-  const [inputs, setInputs] = useState({
-    title: '',
-    loaction: '',
-  });
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (data != undefined) {
-      setInputs({
-        ...inputs,
-        title: data.title,
-        location: data.location,
-      });
-    }
-  }, []);
-
-  const handleChange = e => {
-    const {text, name} = e;
-
-    setInputs({
-      ...inputs,
-      [name]: text,
-    });
-
-    dispatch(changeInput({form: 'input', name, text}));
-  };
 
   const [scheduleType, setScheduleType] = useState(
     data != undefined ? data.scheduleType : 'inside',
   );
+
+  const [values, setValues] = useState({
+    title: '',
+    loaction: '',
+    day: '',
+    readyTime: '',
+    movingTime: '',
+  });
+
+  useEffect(() => {
+    if (data != undefined) {
+      setValues({
+        ...values,
+        movingTime: data.movingTime,
+        title: data.title,
+        location: data.location,
+        day: data.day,
+        readyTime: data.readyTime,
+      });
+    }
+  }, []);
+
+  const onTextChange = e => {
+    const {value, name} = e;
+
+    setValues({
+      ...values,
+      [name]: value,
+    });
+
+    dispatch(changeInput({form: 'input', name, value}));
+  };
+
+  const onPickerItemChange = e => {
+    const {value, name} = e;
+
+    setValues({
+      ...values,
+      [name]: value,
+    });
+
+    console.log(e);
+  };
 
   const changeScheduleType = useCallback(type => {
     setScheduleType(type);
@@ -42,12 +60,13 @@ const ScheduleModalContainer = ({close, data}) => {
 
   const props = {
     changeScheduleType: changeScheduleType,
-    handleChange: handleChange,
+    onTextChange: onTextChange,
+    onPickerItemChange: onPickerItemChange,
     close: close,
     scheduleType,
     title,
     data,
-    inputs,
+    values,
   };
   return <ScheduleModalPresenter {...props} />;
 };

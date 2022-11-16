@@ -1,19 +1,22 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, PickerIOS} from 'react-native';
 import Text from '../../components/atoms/Text';
 import Icon from '../../components/atoms/Icon';
 import close_icon from '../../asset/images/close_icon.png';
 import Input from '../../components/atoms/Input';
 import Button from '../../components/molecules/Button';
+import Picker from '../../components/atoms/Picker';
+import TimePicker from '../../components/atoms/TimePicker';
 
 const ScheduleModalPresenter = ({
   changeScheduleType,
-  handleChange,
+  onTextChange,
+  onPickerItemChange,
   scheduleType,
   close,
   title,
   data,
-  inputs,
+  values,
 }) => {
   return (
     <View style={styles.modal}>
@@ -28,32 +31,61 @@ const ScheduleModalPresenter = ({
       <Input
         hint="일정이름"
         marginBottom={20}
-        value={inputs.title}
+        value={values.title}
         name="title"
-        handle={handleChange}
+        handle={onTextChange}
       />
-      <Input
-        hint="요일 및 시간"
+      <Picker
+        hint="요일"
         marginBottom={20}
-        value={data != undefined ? data.day + ' ' + data.time : ''}
+        name="day"
+        item={[
+          {label: '월요일', value: 'mon', key: '1'},
+          {label: '화요일', value: 'tue', key: '2'},
+          {label: '수요일', value: 'wed', key: '3'},
+          {label: '목요일', value: 'thu', key: '4'},
+          {label: '금요일', value: 'fri', key: '5'},
+        ]}
+        value={values.day}
+        handle={onPickerItemChange}
       />
       <Input
         hint="장소"
         marginBottom={20}
-        value={inputs.location}
+        value={values.location}
         name="location"
-        handle={handleChange}
+        handle={onTextChange}
       />
-      <Input
+      <Picker
         hint="준비 시간"
         marginBottom={20}
-        value={data != undefined ? data.readyTime.toString() + '분' : ''}
+        name="readyTime"
+        item={[
+          {label: '10분', value: '10', key: '1'},
+          {label: '20분', value: '20', key: '2'},
+          {label: '30분', value: '30', key: '3'},
+          {label: '40분', value: '40', key: '4'},
+          {label: '50분', value: '50', key: '5'},
+        ]}
+        value={values.readyTime}
+        handle={onPickerItemChange}
       />
-      <Input
+      <Picker
         hint="이동 시간"
         marginBottom={32}
-        value={data != undefined ? data.movingTime.toString() + '분' : ''}
+        name="movingTime"
+        item={[
+          {label: '10분', value: '10', key: '1'},
+          {label: '20분', value: '20', key: '2'},
+          {label: '30분', value: '30', key: '3'},
+          {label: '40분', value: '40', key: '4'},
+          {label: '50분', value: '50', key: '5'},
+          {label: '60분', value: '60', key: '6'},
+        ]}
+        value={values.movingTime}
+        handle={onPickerItemChange}
       />
+
       <Text size="small" color="black" fixHeight={30} marginBottom={10}>
         집안에서의 일정인지 집 밖에서의 일정인지{'\n'}선택해수세요!{' '}
       </Text>
