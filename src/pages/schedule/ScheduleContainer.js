@@ -1,17 +1,18 @@
 import React, {useCallback, useRef, useState, useEffect} from 'react';
 import SchedulePresenter from './SchedulePresenter';
-import Animated from 'react-native-reanimated';
+import {Animated} from 'react-native';
 import data from '../../dummy_data/scheduleData.json';
 
 const ScheduleContainer = () => {
   const [sheetData, setSheetData] = useState({});
   const modalRef = useRef(null);
-  const [sheetVisible, setSheetVisible] = useState(false);
   const modifyDataRef = useRef({});
+  const [sheetVisible, setSheetVisible] = useState(false);
   const day = ['mon', 'tue', 'wed', 'thu', 'fri'];
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
   const [scheduleData, setScheduleData] = useState([]);
   const [tableTime, setTableTime] = useState([]);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const createSchedule = () => {
     let dayArray = [];
@@ -46,11 +47,28 @@ const ScheduleContainer = () => {
     setSheetVisible(true);
   }, []);
 
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const fadeOut = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
   const openDialog = useCallback((id, data) => {
     setSheetVisible(false);
     modalRef.current = id;
     modifyDataRef.current = data;
     setIsVisibleDialog(true);
+    fadeIn();
   }, []);
 
   const createTimeTable = (num, units) => {
@@ -65,6 +83,7 @@ const ScheduleContainer = () => {
 
   const closeDialog = useCallback(() => {
     setIsVisibleDialog(false);
+    fadeOut();
   }, []);
 
   useEffect(() => {
@@ -77,6 +96,7 @@ const ScheduleContainer = () => {
     openDialog: openDialog,
     closeDialog: closeDialog,
     setModalVisible: setSheetVisible,
+    fadeAnim,
     sheetData,
     modalRef,
     modifyDataRef,

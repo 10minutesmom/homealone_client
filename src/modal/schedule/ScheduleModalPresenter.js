@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, PickerIOS} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import Text from '../../components/atoms/Text';
 import Icon from '../../components/atoms/Icon';
 import close_icon from '../../asset/images/close_icon.png';
@@ -127,6 +127,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#F4F4F4',
     position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: [
+      {
+        translateX: -Dimensions.get('window').width * 0.38,
+      },
+    ],
     borderRadius: 12,
     top: 100,
   },

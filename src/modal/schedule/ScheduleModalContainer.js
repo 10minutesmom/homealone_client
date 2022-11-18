@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {changeInput} from '../../redux/reducers/Input';
 
 const ScheduleModalContainer = ({close, data}) => {
-  let title = data != undefined ? '수정하기' : '추가하기';
+  let title = data.current != undefined ? '수정하기' : '추가하기';
   const dispatch = useDispatch();
 
   const [show, setShow] = useState({
@@ -12,7 +12,7 @@ const ScheduleModalContainer = ({close, data}) => {
     endTime: false,
   });
   const [scheduleType, setScheduleType] = useState(
-    data != undefined ? data.scheduleType : 'inside',
+    data.current != undefined ? data.current.scheduleType : 'inside',
   );
 
   const [values, setValues] = useState({
@@ -26,14 +26,14 @@ const ScheduleModalContainer = ({close, data}) => {
   });
 
   useEffect(() => {
-    if (data != undefined) {
+    if (data.current != undefined) {
       setValues({
         ...values,
-        movingTime: data.movingTime,
-        title: data.title,
-        location: data.location,
-        day: data.day,
-        readyTime: data.readyTime,
+        movingTime: data.current.movingTime,
+        title: data.current.title,
+        location: data.current.location,
+        day: data.current.day,
+        readyTime: data.current.readyTime,
       });
     }
   }, []);

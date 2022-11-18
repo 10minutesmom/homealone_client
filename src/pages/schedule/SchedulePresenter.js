@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView, Animated, Modal} from 'react-native';
 import Container from '../../components/atoms/Container';
 import Header from '../../components/organisms/Header';
 import add from '../../asset/images/add_icon.png';
@@ -7,17 +7,16 @@ import Text from '../../components/atoms/Text';
 import {Dimensions} from 'react-native';
 import DailyScheduleMatrix from '../../components/molecules/DailyScheduleMatrix';
 import {Portal} from '@gorhom/portal';
-import Dialog from 'react-native-popup-dialog';
 import ScheduleModal from '../../modal/schedule/ScheduleModalContainer';
 import BasicModal from '../../modal/basic/BasicModalContainer';
 import BottomSheet from '../../sheet/BottomSheet';
-import {Provider, ReactReduxContext} from 'react-redux';
 
 const SchedulePresenter = ({
   openSheet,
   openDialog,
   closeDialog,
   setModalVisible,
+  fadeAnim,
   sheetData,
   modalRef,
   modifyDataRef,
@@ -63,17 +62,24 @@ const SchedulePresenter = ({
           data={sheetData}
           onPress={openDialog}
         />
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            {
+              ...StyleSheet.absoluteFillObject,
+              backgroundColor: 'rgba(0,0,0,0.3)',
+              opacity: fadeAnim,
+            },
+          ]}
+        />
+        <Modal visible={isVisibleDialog} animationType={'fade'} transparent>
+          {modalRef.current == 0 ? (
+            <ScheduleModal close={closeDialog} data={modifyDataRef} />
+          ) : (
+            <BasicModal close={closeDialog} />
+          )}
+        </Modal>
       </Portal>
-      {/* <Dialog visible={isVisibleDialog} onTouchOutside={() => closeDialog()}>
-        {modalRef.current == 0 ? (
-          <ScheduleModal close={closeDialog} data={modifyDataRef.current} />
-        ) : (
-          <BasicModal close={closeDialog} />
-        )}
-      </Dialog> */}
-      {isVisibleDialog ? (
-        <ScheduleModal close={closeDialog} data={modifyDataRef.current} />
-      ) : null}
     </Container>
   );
 };

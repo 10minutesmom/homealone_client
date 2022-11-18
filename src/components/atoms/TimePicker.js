@@ -8,7 +8,7 @@ const TimePicker = ({show, marginBottom, value, handle}) => {
     <View style={styles(marginBottom).input}>
       <View style={{marginRight: 12}}>
         <View style={styles(0).box}>
-          <Text size="medium" color="black">
+          <Text size="medium" color={show.startTime ? 'black' : '#C7C7CD'}>
             {show.startTime
               ? `${value.startTime.getHours()}시 ${value.startTime.getMinutes()}분`
               : '시작 시간'}
@@ -27,13 +27,13 @@ const TimePicker = ({show, marginBottom, value, handle}) => {
           />
         </View>
       </View>
-      <Text size="medium" color="black" marginRight={12}>
+      <Text size="medium" color="#C7C7CD" marginRight={12}>
         ~
       </Text>
 
       <View style={{marginRight: 12}}>
         <View style={styles(0).box}>
-          <Text size="medium" color="black">
+          <Text size="medium" color={show.endTime ? 'black' : '#C7C7CD'}>
             {show.endTime
               ? `${value.endTime.getHours()}시 ${value.endTime.getMinutes()}분`
               : '끝나는 시간'}

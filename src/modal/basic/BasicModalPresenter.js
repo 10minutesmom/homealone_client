@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import Button from '../../components/molecules/Button';
 import Text from '../../components/atoms/Text';
 
@@ -32,6 +32,14 @@ const styles = StyleSheet.create({
     width: 300,
     height: 142,
     justifyContent: 'center',
+    position: 'absolute',
+    top: '40%',
+    left: '50%',
+    transform: [
+      {
+        translateX: -Dimensions.get('window').width * 0.38,
+      },
+    ],
   },
   text: {
     width: '100%',

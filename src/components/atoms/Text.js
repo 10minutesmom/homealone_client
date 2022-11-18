@@ -38,6 +38,7 @@ const CustomText = ({
     if (color == 'white') return '#FFFFFF';
     if (color == 'black') return '#000000';
     if (color == 'grey') return '#767676';
+    return color;
   };
 
   return (
