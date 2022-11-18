@@ -9,35 +9,9 @@ const ScheduleContainer = () => {
   const [sheetVisible, setSheetVisible] = useState(false);
   const modifyDataRef = useRef({});
   const day = ['mon', 'tue', 'wed', 'thu', 'fri'];
-  const tableTime = [
-    '12am',
-    '1am',
-    '2am',
-    '3am',
-    '4am',
-    '5am',
-    '6am',
-    '7am',
-    '8am',
-    '9am',
-    '10am',
-    '11am',
-    '12pm',
-    '1pm',
-    '2pm',
-    '3pm',
-    '4pm',
-    '5pm',
-    '6pm',
-    '7pm',
-    '8pm',
-    '9pm',
-    '10pm',
-    '11pm',
-    '12am',
-  ];
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
   const [scheduleData, setScheduleData] = useState([]);
+  const [tableTime, setTableTime] = useState([]);
 
   const createSchedule = () => {
     let dayArray = [];
@@ -79,11 +53,22 @@ const ScheduleContainer = () => {
     setIsVisibleDialog(true);
   }, []);
 
+  const createTimeTable = (num, units) => {
+    let arr = [];
+    units.map(unit => {
+      temp = [...new Array(num - 1).keys()].map(e => String(e + 1) + unit);
+      temp.splice(0, 0, String(num) + unit);
+      arr = [...arr, ...temp];
+    });
+    return arr;
+  };
+
   const closeDialog = useCallback(() => {
     setIsVisibleDialog(false);
   }, []);
 
   useEffect(() => {
+    setTableTime([...createTimeTable(12, ['am', 'pm'])]);
     setScheduleData([...createSchedule()]);
   }, []);
 

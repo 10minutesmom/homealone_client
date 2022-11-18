@@ -8,15 +8,14 @@ import {setUser} from '../redux/reducers/UserData';
 const Auth = () => {
   const [isLogggedIn, setIsLogggedIn] = useState(false);
   const dispatch = useDispatch();
+
   const checkLoggedIn = () => {
     auth().onAuthStateChanged(user => {
       if (user) {
         setIsLogggedIn(true);
         dispatch(setUser(user));
-        console.log('loggedIn');
       } else {
         setIsLogggedIn(false);
-        console.log('loggedOut');
       }
     });
   };
