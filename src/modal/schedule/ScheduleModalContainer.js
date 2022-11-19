@@ -11,6 +11,7 @@ const ScheduleModalContainer = ({close, data}) => {
     startTime: false,
     endTime: false,
   });
+
   const [scheduleType, setScheduleType] = useState(
     data.current != undefined ? data.current.scheduleType : 'inside',
   );
@@ -34,9 +35,23 @@ const ScheduleModalContainer = ({close, data}) => {
         location: data.current.location,
         day: data.current.day,
         readyTime: data.current.readyTime,
+        startTime: new Date(2022, 2, 2, timeFormatter(data.current.startTime)),
+        endTime: new Date(2022, 2, 2, timeFormatter(data.current.endTime)),
+      });
+      setShow({
+        ...show,
+        startTime: true,
+        endTime: true,
       });
     }
   }, []);
+
+  const timeFormatter = time => {
+    if (time === '12pm') return 12;
+    else if (time === '12am') return 0;
+    else if (time.substr(-2) === 'pm') return Number(time.slice(0, -2)) + 12;
+    else return Number(time.slice(0, -2));
+  };
 
   const onTextChange = e => {
     const {value, name} = e;

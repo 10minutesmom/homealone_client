@@ -40,12 +40,18 @@ const ScheduleContainer = () => {
     return dayArray;
   };
 
-  const openSheet = useCallback((data, day, time, hour) => {
-    const assingedTime = `${tableTime[time - hour]} ~ ${tableTime[time]}`;
-    const assignedData = Object.assign(data, {time: assingedTime, day: day});
-    setSheetData(Object.assign(sheetData, assignedData));
-    setSheetVisible(true);
-  }, []);
+  const openSheet = useCallback(
+    (data, day, time, hour) => {
+      const assignedData = Object.assign(data, {
+        startTime: tableTime[time - hour],
+        endTime: tableTime[time],
+        day: day,
+      });
+      setSheetData(Object.assign(sheetData, assignedData));
+      setSheetVisible(true);
+    },
+    [tableTime],
+  );
 
   const fadeIn = () => {
     Animated.timing(fadeAnim, {

@@ -15,7 +15,7 @@ const ScheduleSheetPresenter = ({data, onPress}) => {
           {data['day']}
         </Text>
         <Text size="big" color="black" weight="bold" marginBottom={34}>
-          {data['time']}
+          {`${data['startTime']} ~ ${data['endTime']}`}
         </Text>
         <View style={styles.textBox}>
           <Text size="regular" color="black" weight="bold" marginRight={8}>
