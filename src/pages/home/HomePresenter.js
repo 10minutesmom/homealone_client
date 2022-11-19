@@ -8,7 +8,7 @@ import TextWithIcon from '../../components/molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
 import clock_icon from '../../asset/images/clock_icon.png';
 
-const HomePresenter = () => {
+const HomePresenter = ({minutes, seconds}) => {
   return (
     <Container>
       <Header marginBottom={62}>HOME</Header>
@@ -59,7 +59,7 @@ const HomePresenter = () => {
               남은시간
             </Text>
             <Text size="extra" color="black" weight="bold" marginBottom={10}>
-              58 : 00
+              {minutes} : {seconds < 10 ? `0${seconds}` : seconds}
             </Text>
             <TextWithIcon source={location_icon} marginBottom={6}>
               한양대학교
