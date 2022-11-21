@@ -7,7 +7,7 @@ const Input = ({hint, marginBottom, value, name, handle}) => {
       style={styles(marginBottom).input}
       placeholder={hint}
       value={value}
-      onChangeText={text => handle({text, name})}
+      onChangeText={value => handle({value, name})}
     />
   );
 };

@@ -1,11 +1,8 @@
-import React, {useState, useCallback, useRef, useEffect} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import ScheduleModalPresenter from './ScheduleModalPresenter';
-import {useDispatch} from 'react-redux';
-import {changeInput} from '../../redux/reducers/Input';
 
 const ScheduleModalContainer = ({close, data}) => {
   let title = data.current != undefined ? '수정하기' : '추가하기';
-  const dispatch = useDispatch();
 
   const [show, setShow] = useState({
     startTime: false,
@@ -18,7 +15,7 @@ const ScheduleModalContainer = ({close, data}) => {
 
   const [values, setValues] = useState({
     title: '',
-    loaction: '',
+    location: '',
     day: '',
     readyTime: '',
     movingTime: '',
@@ -53,29 +50,7 @@ const ScheduleModalContainer = ({close, data}) => {
     else return Number(time.slice(0, -2));
   };
 
-  const onTextChange = e => {
-    const {value, name} = e;
-
-    setValues({
-      ...values,
-      [name]: value,
-    });
-
-    dispatch(changeInput({form: 'input', name, value}));
-  };
-
-  const onPickerItemChange = e => {
-    const {value, name} = e;
-
-    setValues({
-      ...values,
-      [name]: value,
-    });
-
-    console.log(e);
-  };
-
-  const onTimeChange = e => {
+  const onValueChange = e => {
     const {value, name} = e;
 
     setValues({
@@ -86,15 +61,19 @@ const ScheduleModalContainer = ({close, data}) => {
     if (show[name] === false) setShow({...show, [name]: true});
   };
 
+  const createSchedule = () => {
+    console.log(values);
+    close();
+  };
+
   const changeScheduleType = useCallback(type => {
     setScheduleType(type);
   }, []);
 
   const props = {
     changeScheduleType: changeScheduleType,
-    onTextChange: onTextChange,
-    onPickerItemChange: onPickerItemChange,
-    onTimeChange: onTimeChange,
+    onValueChange: onValueChange,
+    createSchedule: createSchedule,
     close: close,
     scheduleType,
     title,

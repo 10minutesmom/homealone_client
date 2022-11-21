@@ -134,20 +134,20 @@
         "movingTime": "60"
       },
       "40": {
-        "id": "1",
-        "title": "학교가기",
-        "location": "학교",
-        "scheduleType": "outside",
-        "readyTime": "30",
-        "movingTime": "60"
+        "id": "0",
+        "title": "",
+        "location": "",
+        "scheduleType": "",
+        "readyTime": 0,
+        "movingTime": 0
       },
       "50": {
-        "id": "1",
-        "title": "학교가기",
-        "location": "학교",
-        "scheduleType": "outside",
-        "readyTime": "30",
-        "movingTime": "60"
+        "id": "0",
+        "title": "",
+        "location": "",
+        "scheduleType": "",
+        "readyTime": 0,
+        "movingTime": 0
       }
     },
     "03": {

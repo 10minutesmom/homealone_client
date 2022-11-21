@@ -10,9 +10,8 @@ import TimePicker from '../../components/atoms/TimePicker';
 
 const ScheduleModalPresenter = ({
   changeScheduleType,
-  onTextChange,
-  onPickerItemChange,
-  onTimeChange,
+  onValueChange,
+  createSchedule,
   scheduleType,
   close,
   title,
@@ -34,7 +33,7 @@ const ScheduleModalPresenter = ({
         marginBottom={20}
         value={values.title}
         name="title"
-        handle={onTextChange}
+        handle={onValueChange}
       />
       <Picker
         hint="요일"
@@ -48,12 +47,12 @@ const ScheduleModalPresenter = ({
           {label: '금요일', value: 'fri', key: '5'},
         ]}
         value={values.day}
-        handle={onPickerItemChange}
+        handle={onValueChange}
       />
       <TimePicker
         marginBottom={20}
         value={values}
-        handle={onTimeChange}
+        handle={onValueChange}
         show={show}
       />
       <Input
@@ -61,7 +60,7 @@ const ScheduleModalPresenter = ({
         marginBottom={20}
         value={values.location}
         name="location"
-        handle={onTextChange}
+        handle={onValueChange}
       />
       <Picker
         hint="준비 시간"
@@ -75,7 +74,7 @@ const ScheduleModalPresenter = ({
           {label: '50분', value: '50', key: '5'},
         ]}
         value={values.readyTime}
-        handle={onPickerItemChange}
+        handle={onValueChange}
       />
       <Picker
         hint="이동 시간"
@@ -90,7 +89,7 @@ const ScheduleModalPresenter = ({
           {label: '60분', value: '60', key: '6'},
         ]}
         value={values.movingTime}
-        handle={onPickerItemChange}
+        handle={onValueChange}
       />
 
       <Text size="small" color="black" fixHeight={30} marginBottom={10}>
@@ -112,7 +111,7 @@ const ScheduleModalPresenter = ({
           외부
         </Button>
       </View>
-      <Button border={false} width="100%">
+      <Button border={false} width="100%" onPress={createSchedule}>
         {title}
       </Button>
     </View>

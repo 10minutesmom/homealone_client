@@ -2,8 +2,12 @@ import React, {useState, useEffect} from 'react';
 import HomePresenter from './HomePresenter';
 
 const HomeContainer = () => {
-  const [minutes, setMinutes] = useState(parseInt(1));
-  const [seconds, setSeconds] = useState(parseInt(0));
+  const [minutes, setMinutes] = useState(parseInt(0));
+  const [seconds, setSeconds] = useState(parseInt(10));
+
+  useEffect(() => {
+    console.log('다시 설정');
+  });
 
   useEffect(() => {
     const countdown = setInterval(() => {
