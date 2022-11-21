@@ -4,15 +4,15 @@ import Text from '../atoms/Text';
 import TextWithIcon from '../molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
 
-const ScheduleBox = ({hour, width, data, day, time, onPress}) => {
+const ScheduleBox = ({count, width, data, day, time, onPress}) => {
   return (
-    <TouchableOpacity onPress={() => onPress(data, day, time, hour)}>
-      <View style={boxStyle(hour, width).scheduleBox}>
+    <TouchableOpacity onPress={() => onPress(data, day, time)}>
+      <View style={boxStyle(count, width).scheduleBox}>
         <View style={styles.textBox}>
           <Text size="medium" color="black" marginBottom={2}>
             {data['title']}
           </Text>
-          {hour >= 2 ? (
+          {count >= 12 ? (
             <Text size="small" color="grey">
               {data['scheduleType']}
             </Text>
@@ -39,12 +39,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const boxStyle = (hour, width) =>
+const boxStyle = (count, width) =>
   StyleSheet.create({
     scheduleBox: {
       backgroundColor: 'white',
       width: (width - 12) / 5 - 1,
-      height: hour * 42,
+      height: (count / 6) * 42,
       borderColor: '#9CF1A4',
       borderTopWidth: 2,
       shadowColor: '#000000',

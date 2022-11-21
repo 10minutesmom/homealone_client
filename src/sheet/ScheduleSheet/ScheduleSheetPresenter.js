@@ -6,7 +6,7 @@ import location_icon from '../../asset/images/location_icon.png';
 import clock_icon from '../../asset/images/clock_icon.png';
 import Button from '../../components/molecules/Button';
 
-const ScheduleSheetPresenter = ({data, onPress}) => {
+const ScheduleSheetPresenter = ({data, startTime, endTime, onPress}) => {
   return (
     <View style={styles.sheet}>
       <View style={styles.bar} />
@@ -15,7 +15,7 @@ const ScheduleSheetPresenter = ({data, onPress}) => {
           {data['day']}
         </Text>
         <Text size="big" color="black" weight="bold" marginBottom={34}>
-          {`${data['startTime']} ~ ${data['endTime']}`}
+          {startTime} ~ {endTime}
         </Text>
         <View style={styles.textBox}>
           <Text size="regular" color="black" weight="bold" marginRight={8}>

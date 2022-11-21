@@ -32,8 +32,24 @@ const ScheduleModalContainer = ({close, data}) => {
         location: data.current.location,
         day: data.current.day,
         readyTime: data.current.readyTime,
-        startTime: new Date(2022, 2, 2, timeFormatter(data.current.startTime)),
-        endTime: new Date(2022, 2, 2, timeFormatter(data.current.endTime)),
+        startTime: new Date(
+          2022,
+          2,
+          2,
+          Number(data.current.startHour),
+          Number(data.current.startMin),
+        ),
+        endTime: new Date(
+          2022,
+          2,
+          2,
+          data.current.endMin === '50'
+            ? Number(data.current.endHour) + 1
+            : Number(data.current.endHour),
+          data.current.endMin === '50'
+            ? '00'
+            : Number(data.current.endMin) + 10,
+        ),
       });
       setShow({
         ...show,
@@ -42,13 +58,6 @@ const ScheduleModalContainer = ({close, data}) => {
       });
     }
   }, []);
-
-  const timeFormatter = time => {
-    if (time === '12pm') return 12;
-    else if (time === '12am') return 0;
-    else if (time.substr(-2) === 'pm') return Number(time.slice(0, -2)) + 12;
-    else return Number(time.slice(0, -2));
-  };
 
   const onValueChange = e => {
     const {value, name} = e;

@@ -15,36 +15,65 @@ const ScheduleContainer = () => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const createSchedule = () => {
-    let dayArray = [];
+    let dayArr = [];
     for (let day of Object.keys(data)) {
-      let temp = [];
-      let timeArray = [];
-      let prevId = data[day]['00']['00']['id'];
-      temp.push(data[day]['00']['00']);
-      for (let i = 1; i < 24; i++) {
-        let time = i.toString().padStart(2, '0');
-        if (prevId == data[day][time]['00']['id']) {
-          if (prevId != '0') temp.push(data[day][time]['00']);
-          else temp.push({id: '0'});
-        } else {
-          timeArray.push(temp);
-          temp = [];
-          prevId = data[day][time]['00']['id'];
-          if (prevId != '0') temp.push(data[day][time]['00']);
-          else temp.push({id: '0'});
+      let timeArr = [];
+      let count = 0;
+      let startHour = '00';
+      let startMin = '00';
+      let endHour = '00';
+      let endMin = '00';
+      let prevData = data[day]['00']['00'];
+      for (let i = 0; i < 24; i++) {
+        let hour = i.toString().padStart(2, '0');
+        for (let j = 0; j < 6; j++) {
+          let min = (j * 10).toString().padStart(2, '0');
+          if (prevData['id'] == data[day][hour][min]['id']) {
+            endHour = hour;
+            endMin = min;
+            count += 1;
+          } else {
+            timeArr.push({
+              data: prevData,
+              count: count,
+              time: {
+                startHour: startHour,
+                startMin: startMin,
+                endHour: endHour,
+                endMin: endMin,
+              },
+            });
+            count = 1;
+            prevData = data[day][hour][min];
+            startHour = hour;
+            startMin = min;
+          }
         }
       }
-      if (temp.length !== 0) timeArray.push(temp);
-      dayArray.push(timeArray);
+      if (count > 0) {
+        timeArr.push({
+          data: prevData,
+          count: count,
+          time: {
+            startHour: startHour,
+            startMin: startMin,
+            endHour: endHour,
+            endMin: endMin,
+          },
+        });
+      }
+      dayArr.push(timeArr);
     }
-    return dayArray;
+    return dayArr;
   };
 
   const openSheet = useCallback(
-    (data, day, time, hour) => {
+    (data, day, time) => {
       const assignedData = Object.assign(data, {
-        startTime: tableTime[time - hour],
-        endTime: tableTime[time],
+        startHour: time.startHour,
+        startMin: time.startMin,
+        endHour: time.endHour,
+        endMin: time.endMin,
         day: day,
       });
       setSheetData(Object.assign(sheetData, assignedData));

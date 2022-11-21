@@ -10,32 +10,26 @@ const DailyScheduleMatrix = ({width, day, dailyData, onPress}) => {
       <Text size="small" color="black" marginBottom={14}>
         {day}
       </Text>
+      <View>
+        {[...new Array(24).keys()].map((e, i) => {
+          return <Box key={i} width={width} day={day} index={e || i} />;
+        })}
 
-      {dailyData.map((item, dayIndex) => {
-        let time = 0;
-        return (
-          <View key={dayIndex}>
-            {item.map((e, i) => {
-              time += 1;
-              return (
-                <Box key={i} width={width} day={day} index={dayIndex || i} />
-              );
-            })}
-            {item[0]['id'] != '0' ? (
-              <View key={dayIndex} style={styles(day, dayIndex).box}>
-                <ScheduleBox
-                  hour={item.length}
-                  width={width}
-                  data={item[0]}
-                  day={day}
-                  time={time}
-                  onPress={onPress}
-                />
-              </View>
-            ) : null}
-          </View>
-        );
-      })}
+        {dailyData.map((item, dayIndex) => {
+          return item.data.id != '0' ? (
+            <View key={dayIndex} style={styles(day, dayIndex).box}>
+              <ScheduleBox
+                count={item.count}
+                width={width}
+                data={item.data}
+                day={day}
+                time={item.time}
+                onPress={onPress}
+              />
+            </View>
+          ) : null;
+        })}
+      </View>
     </View>
   );
 };

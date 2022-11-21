@@ -5,9 +5,9 @@ const HomeContainer = () => {
   const [minutes, setMinutes] = useState(parseInt(0));
   const [seconds, setSeconds] = useState(parseInt(10));
 
-  useEffect(() => {
-    console.log('다시 설정');
-  });
+  // useEffect(() => {
+  //   console.log('다시 설정');
+  // });
 
   useEffect(() => {
     const countdown = setInterval(() => {
