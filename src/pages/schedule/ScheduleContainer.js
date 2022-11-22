@@ -1,7 +1,8 @@
 import React, {useCallback, useRef, useState, useEffect} from 'react';
 import SchedulePresenter from './SchedulePresenter';
-import {Animated} from 'react-native';
-import data from '../../dummy_data/scheduleData.json';
+import useDidMountEffect from '../../hooks/useDidMountEffect';
+import useFade from '../../hooks/useFade';
+import axios from 'axios';
 
 const ScheduleContainer = () => {
   const [sheetData, setSheetData] = useState({});
@@ -10,25 +11,42 @@ const ScheduleContainer = () => {
   const [sheetVisible, setSheetVisible] = useState(false);
   const day = ['mon', 'tue', 'wed', 'thu', 'fri'];
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
-  const [scheduleData, setScheduleData] = useState([]);
+  const [data, setData] = useState({});
+  const [scheduleData, setScheduleData] = useState([[], [], [], [], []]);
   const [tableTime, setTableTime] = useState([]);
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [fadeAnim, fadeIn, fadeOut] = useFade();
+
+  const getScheduleData = async () => {
+    axios
+      .get('http://127.0.0.1:8000/apiserver/scheduleinit')
+      .then(function (response) {
+        // handle success
+        setData(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+  };
 
   const createSchedule = () => {
     let dayArr = [];
-    for (let day of Object.keys(data)) {
+    for (let day of Object.keys(data.timetable)) {
       let timeArr = [];
       let count = 0;
       let startHour = '00';
       let startMin = '00';
       let endHour = '00';
       let endMin = '00';
-      let prevData = data[day]['00']['00'];
+      let prevData = data['timetable'][day]['00']['00'];
       for (let i = 0; i < 24; i++) {
         let hour = i.toString().padStart(2, '0');
         for (let j = 0; j < 6; j++) {
           let min = (j * 10).toString().padStart(2, '0');
-          if (prevData['id'] == data[day][hour][min]['id']) {
+          if (prevData['id'] == data['timetable'][day][hour][min]['id']) {
             endHour = hour;
             endMin = min;
             count += 1;
@@ -44,7 +62,7 @@ const ScheduleContainer = () => {
               },
             });
             count = 1;
-            prevData = data[day][hour][min];
+            prevData = data['timetable'][day][hour][min];
             startHour = hour;
             startMin = min;
           }
@@ -82,28 +100,17 @@ const ScheduleContainer = () => {
     [tableTime],
   );
 
-  const fadeIn = () => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const fadeOut = () => {
-    Animated.timing(fadeAnim, {
-      toValue: 0,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
   const openDialog = useCallback((id, data) => {
     setSheetVisible(false);
     modalRef.current = id;
     modifyDataRef.current = data;
     setIsVisibleDialog(true);
     fadeIn();
+  }, []);
+
+  const closeDialog = useCallback(() => {
+    setIsVisibleDialog(false);
+    fadeOut();
   }, []);
 
   const createTimeTable = (num, units) => {
@@ -116,21 +123,22 @@ const ScheduleContainer = () => {
     return arr;
   };
 
-  const closeDialog = useCallback(() => {
-    setIsVisibleDialog(false);
-    fadeOut();
-  }, []);
-
   useEffect(() => {
     setTableTime([...createTimeTable(12, ['am', 'pm'])]);
-    setScheduleData([...createSchedule()]);
+    getScheduleData();
   }, []);
+
+  useDidMountEffect(() => {
+    setScheduleData([...createSchedule()]);
+    console.log(scheduleData);
+  }, [data]);
 
   const props = {
     openSheet: openSheet,
     openDialog: openDialog,
     closeDialog: closeDialog,
     setModalVisible: setSheetVisible,
+    getScheduleData: getScheduleData,
     fadeAnim,
     sheetData,
     modalRef,

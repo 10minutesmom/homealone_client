@@ -14,11 +14,12 @@ const DailyScheduleMatrix = ({width, day, dailyData, onPress}) => {
         {[...new Array(24).keys()].map((e, i) => {
           return <Box key={i} width={width} day={day} index={e || i} />;
         })}
-
-        {dailyData.map((item, dayIndex) => {
-          return item.data.id != '0' ? (
-            <View key={dayIndex} style={styles(day, dayIndex).box}>
+        <View style={styles(day).box}>
+          {dailyData.map((item, dayIndex) => {
+            print(item.data.id);
+            return item.data.id != '0' ? (
               <ScheduleBox
+                key={dayIndex}
                 count={item.count}
                 width={width}
                 data={item.data}
@@ -26,22 +27,30 @@ const DailyScheduleMatrix = ({width, day, dailyData, onPress}) => {
                 time={item.time}
                 onPress={onPress}
               />
-            </View>
-          ) : null;
-        })}
+            ) : (
+              <View key={dayIndex} style={marginStyle(item.count).margin} />
+            );
+          })}
+        </View>
       </View>
     </View>
   );
 };
 
-const styles = (day, dayIndex) =>
+const marginStyle = count =>
+  StyleSheet.create({
+    margin: {
+      marginBottom: (count / 6) * 42,
+    },
+  });
+
+const styles = day =>
   StyleSheet.create({
     matrix: {
       alignItems: 'center',
     },
     box: {
       position: 'absolute',
-      top: dayIndex == 0 ? 0 : -2,
       left: day == 'mon' ? 2 : 0,
     },
   });
