@@ -3,7 +3,7 @@ import {View, StyleSheet, Dimensions} from 'react-native';
 import Button from '../../components/molecules/Button';
 import Text from '../../components/atoms/Text';
 
-const BasicModalPresenter = ({close}) => {
+const BasicModalPresenter = ({close, deleteSchedule}) => {
   return (
     <View style={styles.modal}>
       <View style={styles.text}>
@@ -17,7 +17,7 @@ const BasicModalPresenter = ({close}) => {
             취소
           </Button>
         </View>
-        <Button border={false} width={122} onPress={close}>
+        <Button border={false} width={122} onPress={deleteSchedule}>
           확인
         </Button>
       </View>

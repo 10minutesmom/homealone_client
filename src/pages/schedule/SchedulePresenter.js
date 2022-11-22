@@ -16,6 +16,7 @@ const SchedulePresenter = ({
   openDialog,
   closeDialog,
   setModalVisible,
+  getScheduleData,
   fadeAnim,
   sheetData,
   modalRef,
@@ -74,9 +75,17 @@ const SchedulePresenter = ({
         />
         <Modal visible={isVisibleDialog} animationType={'fade'} transparent>
           {modalRef.current == 0 ? (
-            <ScheduleModal close={closeDialog} data={modifyDataRef} />
+            <ScheduleModal
+              close={closeDialog}
+              getScheduleData={getScheduleData}
+              data={modifyDataRef}
+            />
           ) : (
-            <BasicModal close={closeDialog} />
+            <BasicModal
+              close={closeDialog}
+              getScheduleData={getScheduleData}
+              data={modifyDataRef}
+            />
           )}
         </Modal>
       </Portal>

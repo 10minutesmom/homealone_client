@@ -38,7 +38,7 @@ const ScheduleSheetPresenter = ({data, startTime, endTime, onPress}) => {
             </Button>
           </View>
 
-          <Button border={false} width={132} onPress={() => onPress(1)}>
+          <Button border={false} width={132} onPress={() => onPress(1, data)}>
             삭제하기
           </Button>
         </View>
