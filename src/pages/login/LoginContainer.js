@@ -1,22 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import LoginPresenter from './LoginPresenter';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
-const LoginContainer = ({navigation}) => {
-  const navigate = () => {
-    navigation.navigate('HomeTabs');
-  };
+const LoginContainer = () => {
+  const [isLoading, setIsLoading] = useState(false);
 
   const loginWithGoogle = async () => {
     const {idToken} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    setIsLoading(true);
     return auth().signInWithCredential(googleCredential);
   };
 
   const props = {
-    navigate: navigate,
     loginWithGoogle: loginWithGoogle,
+    isLoading,
   };
 
   return <LoginPresenter {...props} />;

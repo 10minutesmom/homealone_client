@@ -1,13 +1,20 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import Container from '../../components/atoms/Container';
 import Text from '../../components/atoms/Text';
 import Button from '../../components/molecules/Button';
 import Icon from '../../asset/images/google_icon.png';
+import * as Progress from 'react-native-progress';
 
-const LoginPresenter = ({navigate, loginWithGoogle}) => {
+const LoginPresenter = ({loginWithGoogle, isLoading}) => {
   return (
-    <Container>
+    <Container style={styles.progress}>
+      {isLoading ? (
+        <View style={styles.progress}>
+          <Progress.Circle size={30} indeterminate={true} color={'white'} />
+        </View>
+      ) : null}
+
       <View style={[styles.text, {marginTop: 270}]}>
         <Text size="extra" weight="bold" color="black" marginBottom={10}>
           Home Alone
@@ -35,6 +42,19 @@ const styles = StyleSheet.create({
   button: {
     width: '100%',
     paddingHorizontal: 44,
+  },
+  progress: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0, 0.2)',
+    position: 'absolute',
+    zIndex: 9999,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
