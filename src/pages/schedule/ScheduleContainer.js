@@ -16,19 +16,14 @@ const ScheduleContainer = () => {
   const [tableTime, setTableTime] = useState([]);
   const [fadeAnim, fadeIn, fadeOut] = useFade();
 
-  const getScheduleData = async () => {
+  const getScheduleData = () => {
     axios
       .get('http://127.0.0.1:8000/apiserver/scheduleAllinit')
-      .then(function (response) {
-        // handle success
+      .then(response => {
         setData(response.data);
       })
-      .catch(function (error) {
-        // handle error
+      .catch(error => {
         console.log(error);
-      })
-      .finally(function () {
-        // always executed
       });
   };
 
@@ -130,7 +125,6 @@ const ScheduleContainer = () => {
 
   useDidMountEffect(() => {
     setScheduleData([...createSchedule()]);
-    console.log(scheduleData);
   }, [data]);
 
   const props = {

@@ -3,7 +3,7 @@ import BasicModalPresenter from './BasicModalPresenter';
 import axios from 'axios';
 
 const BasicModalContainer = ({close, getScheduleData, data}) => {
-  const deleteSchedule = async () => {
+  const deleteSchedule = () => {
     axios
       .post('http://127.0.0.1:8000/apiserver/scheduledelete', {
         time: {
@@ -13,9 +13,6 @@ const BasicModalContainer = ({close, getScheduleData, data}) => {
           endHour: data.current.endHour,
           endMin: data.current.endMin,
         },
-      })
-      .then(response => {
-        console.log(response);
       })
       .catch(error => {
         console.log(error);

@@ -8,7 +8,8 @@ import TextWithIcon from '../../components/molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
 import clock_icon from '../../asset/images/clock_icon.png';
 
-const HomePresenter = ({minutes, seconds}) => {
+const HomePresenter = ({minutes, seconds, kidStatus, currentScheduleData}) => {
+  console.log(currentScheduleData);
   return (
     <Container>
       <Header marginBottom={62}>HOME</Header>
@@ -23,10 +24,16 @@ const HomePresenter = ({minutes, seconds}) => {
           <View style={contentStyle('row').content}>
             <View>
               <Text size="regular" weight="bold" color="black" marginBottom={8}>
-                외출중
+                {kidStatus[0].is_kid_home == 0
+                  ? '외출중'
+                  : `집 내부 - ${kidStatus[0].where_is_kid}`}
               </Text>
               <Text size="medium" color="black" fixHeight={34}>
-                집 안에서 아이의 위치를 찾지{'\n'}못했습니당
+                {kidStatus[0].is_kid_home == 0
+                  ? '집 안에서 아이의 위치를 찾지\n못했습니당'
+                  : `아이를 ${kidStatus[0].where_is_kid}에서 찾았습니당${'\n'}${
+                      kidStatus[0].where_is_kid
+                    }에 ${kidStatus[0].is_kid_ready}하고 있네요~`}
               </Text>
             </View>
             <Image
@@ -49,10 +56,10 @@ const HomePresenter = ({minutes, seconds}) => {
           <View style={contentStyle('column').content}>
             <View style={marginStyle(26, 'row').margin}>
               <Text size="regular" weight="bold" color="black" marginRight={8}>
-                학교가기
+                {currentScheduleData.title}
               </Text>
               <Text size="small" color="grey">
-                외부일정
+                {currentScheduleData.scheduleType}
               </Text>
             </View>
             <Text size="small" color="grey" marginBottom={2}>
@@ -62,7 +69,7 @@ const HomePresenter = ({minutes, seconds}) => {
               {minutes} : {seconds < 10 ? `0${seconds}` : seconds}
             </Text>
             <TextWithIcon source={location_icon} marginBottom={6}>
-              한양대학교
+              {currentScheduleData.location}
             </TextWithIcon>
             <TextWithIcon source={clock_icon}>15 : 00</TextWithIcon>
           </View>

@@ -93,9 +93,6 @@ const ScheduleModalContainer = ({close, getScheduleData, data}) => {
         readyTime: values.readyTime,
         movingTime: values.movingTime,
       })
-      .then(response => {
-        console.log(response);
-      })
       .catch(error => {
         console.log(error);
       })
@@ -106,7 +103,7 @@ const ScheduleModalContainer = ({close, getScheduleData, data}) => {
     close();
   };
 
-  const editSchedule = async () => {
+  const editSchedule = () => {
     axios
       .post('http://127.0.0.1:8000/apiserver/schedulemodify', {
         uid: '',
@@ -123,9 +120,6 @@ const ScheduleModalContainer = ({close, getScheduleData, data}) => {
         location: values.location,
         readyTime: values.readyTime,
         movingTime: values.movingTime,
-      })
-      .then(response => {
-        console.log(response);
       })
       .catch(error => {
         console.log(error);
