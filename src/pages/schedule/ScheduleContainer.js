@@ -18,7 +18,7 @@ const ScheduleContainer = () => {
 
   const getScheduleData = async () => {
     axios
-      .get('http://127.0.0.1:8000/apiserver/scheduleinit')
+      .get('http://127.0.0.1:8000/apiserver/scheduleAllinit')
       .then(function (response) {
         // handle success
         setData(response.data);

@@ -12,6 +12,7 @@ const ScheduleModalPresenter = ({
   changeScheduleType,
   onValueChange,
   createSchedule,
+  editSchedule,
   scheduleType,
   close,
   title,
@@ -111,7 +112,10 @@ const ScheduleModalPresenter = ({
           외부
         </Button>
       </View>
-      <Button border={false} width="100%" onPress={createSchedule}>
+      <Button
+        border={false}
+        width="100%"
+        onPress={title === '추가하기' ? createSchedule : editSchedule}>
         {title}
       </Button>
     </View>
