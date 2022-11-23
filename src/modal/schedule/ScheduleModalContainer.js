@@ -2,6 +2,7 @@ import React, {useState, useCallback, useEffect, useRef} from 'react';
 import ScheduleModalPresenter from './ScheduleModalPresenter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import createSnackbar from '../../utils/createSnackbar';
 
 const ScheduleModalContainer = ({close, getScheduleData, data}) => {
   let title = data.current != undefined ? '수정하기' : '추가하기';
@@ -22,8 +23,8 @@ const ScheduleModalContainer = ({close, getScheduleData, data}) => {
     day: '',
     readyTime: '',
     movingTime: '',
-    startTime: new Date(),
-    endTime: new Date(),
+    startTime: new Date(2022, 2, 2, 0, 0),
+    endTime: new Date(2022, 2, 2, 0, 0),
   });
 
   useEffect(() => {
@@ -71,7 +72,27 @@ const ScheduleModalContainer = ({close, getScheduleData, data}) => {
     }
   }, []);
 
+  const isValuesEmpty = () => {
+    if (values.title === '') return '일정이름';
+    if (values.day === '') return '요일';
+    if (
+      values.startTime.getHours() === values.endTime.getHours() &&
+      values.startTime.getMinutes() === values.endTime.getMinutes()
+    )
+      return '시간';
+    if (values.location === '') return '장소';
+    if (values.readyTime === '') return '준비시간';
+    if (values.movingTime === '') return '이동시간';
+
+    return false;
+  };
+
   const createSchedule = async () => {
+    if ((result = isValuesEmpty())) {
+      createSnackbar(`${result}을 입력해주세요!`);
+      return;
+    }
+
     const prevId = await getScheduleId();
     const newId = (Number(prevId) + 1).toString();
     storeScheduleId(newId);
@@ -93,8 +114,11 @@ const ScheduleModalContainer = ({close, getScheduleData, data}) => {
         readyTime: values.readyTime,
         movingTime: values.movingTime,
       })
+      .then(response => {
+        createSnackbar('스케쥴이 생성되었습니다!');
+      })
       .catch(error => {
-        console.log(error);
+        createSnackbar('스케쥴 생성을 실패했습니다!');
       })
       .finally(() => {
         getScheduleData();
@@ -104,6 +128,11 @@ const ScheduleModalContainer = ({close, getScheduleData, data}) => {
   };
 
   const editSchedule = () => {
+    if ((result = isValuesEmpty())) {
+      createSnackbar(`${result}을 입력해주세요!`);
+      return;
+    }
+
     axios
       .post('http://127.0.0.1:8000/apiserver/schedulemodify', {
         uid: '',
@@ -121,8 +150,11 @@ const ScheduleModalContainer = ({close, getScheduleData, data}) => {
         readyTime: values.readyTime,
         movingTime: values.movingTime,
       })
+      .then(response => {
+        createSnackbar('스케쥴이 수정되었습니다!');
+      })
       .catch(error => {
-        console.log(error);
+        createSnackbar('스케쥴 수정을 실패했습니다!');
       })
       .finally(() => {
         getScheduleData();

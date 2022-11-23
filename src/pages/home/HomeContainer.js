@@ -24,7 +24,7 @@ const HomeContainer = () => {
     axios
       .get('http://127.0.0.1:8000/apiserverkids/?format=json')
       .then(response => {
-        setKidStatus(response.data);
+        setKidStatus(response.data[0]);
       })
       .catch(error => {
         console.log(error);

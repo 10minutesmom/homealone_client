@@ -1,6 +1,7 @@
 import React from 'react';
 import BasicModalPresenter from './BasicModalPresenter';
 import axios from 'axios';
+import createSnackbar from '../../utils/createSnackbar';
 
 const BasicModalContainer = ({close, getScheduleData, data}) => {
   const deleteSchedule = () => {
@@ -14,8 +15,11 @@ const BasicModalContainer = ({close, getScheduleData, data}) => {
           endMin: data.current.endMin,
         },
       })
+      .then(response => {
+        createSnackbar('스케쥴이 삭제되었습니다!');
+      })
       .catch(error => {
-        console.log(error);
+        createSnackbar('스케쥴 삭제를 실패했습니다!');
       })
       .finally(() => {
         getScheduleData();

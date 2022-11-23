@@ -9,7 +9,6 @@ import location_icon from '../../asset/images/location_icon.png';
 import clock_icon from '../../asset/images/clock_icon.png';
 
 const HomePresenter = ({minutes, seconds, kidStatus, currentScheduleData}) => {
-  console.log(currentScheduleData);
   return (
     <Container>
       <Header marginBottom={62}>HOME</Header>
@@ -24,16 +23,16 @@ const HomePresenter = ({minutes, seconds, kidStatus, currentScheduleData}) => {
           <View style={contentStyle('row').content}>
             <View>
               <Text size="regular" weight="bold" color="black" marginBottom={8}>
-                {kidStatus[0].is_kid_home == 0
+                {kidStatus.is_kid_home == 0
                   ? '외출중'
-                  : `집 내부 - ${kidStatus[0].where_is_kid}`}
+                  : `집 내부 - ${kidStatus.where_is_kid}`}
               </Text>
               <Text size="medium" color="black" fixHeight={34}>
-                {kidStatus[0].is_kid_home == 0
+                {kidStatus.is_kid_home == 0
                   ? '집 안에서 아이의 위치를 찾지\n못했습니당'
-                  : `아이를 ${kidStatus[0].where_is_kid}에서 찾았습니당${'\n'}${
-                      kidStatus[0].where_is_kid
-                    }에 ${kidStatus[0].is_kid_ready}하고 있네요~`}
+                  : `아이를 ${kidStatus.where_is_kid}에서 찾았습니당${'\n'}${
+                      kidStatus.where_is_kid
+                    }에 ${kidStatus.is_kid_ready}하고 있네요~`}
               </Text>
             </View>
             <Image
