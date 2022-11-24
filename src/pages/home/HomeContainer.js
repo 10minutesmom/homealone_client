@@ -6,14 +6,15 @@ import axios from 'axios';
 const HomeContainer = () => {
   const [currentScheduleData, setCurrentScheduleData] = useState({});
   const [kidStatus, setKidStatus] = useState({});
-  const [minutes, seconds] = [0, 0];
+  const [hours, minutes, seconds, setTimer] = useTimer();
 
   const getCurrentSchedule = () => {
     axios
       .get('http://127.0.0.1:8000/apiserver/schedulerecent')
       .then(response => {
+        console.log(response.data);
         setCurrentScheduleData(response.data);
-        // minutes, seconds = useTimer(0, response.data)
+        setTimer(response.data.startHour, response.data.startMin);
       })
       .catch(error => {
         console.log(error);
@@ -37,6 +38,7 @@ const HomeContainer = () => {
   }, []);
 
   const props = {
+    hours,
     minutes,
     seconds,
     kidStatus,

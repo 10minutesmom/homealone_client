@@ -8,7 +8,13 @@ import TextWithIcon from '../../components/molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
 import clock_icon from '../../asset/images/clock_icon.png';
 
-const HomePresenter = ({minutes, seconds, kidStatus, currentScheduleData}) => {
+const HomePresenter = ({
+  hours,
+  minutes,
+  seconds,
+  kidStatus,
+  currentScheduleData,
+}) => {
   return (
     <Container>
       <Header marginBottom={62}>HOME</Header>
@@ -65,12 +71,15 @@ const HomePresenter = ({minutes, seconds, kidStatus, currentScheduleData}) => {
               남은시간
             </Text>
             <Text size="extra" color="black" weight="bold" marginBottom={10}>
-              {minutes} : {seconds < 10 ? `0${seconds}` : seconds}
+              {hours} : {minutes < 10 ? `0${minutes}` : minutes} :{' '}
+              {seconds < 10 ? `0${seconds}` : seconds}
             </Text>
             <TextWithIcon source={location_icon} marginBottom={6}>
               {currentScheduleData.location}
             </TextWithIcon>
-            <TextWithIcon source={clock_icon}>15 : 00</TextWithIcon>
+            <TextWithIcon source={clock_icon}>
+              {currentScheduleData.startHour} : {currentScheduleData.startMin}
+            </TextWithIcon>
           </View>
         </Card>
       </View>

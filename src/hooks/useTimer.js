@@ -1,8 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 
-const useTimer = (min, sec) => {
-  const [minutes, setMinutes] = useState(parseInt(min));
-  const [seconds, setSeconds] = useState(parseInt(sec));
+const useTimer = () => {
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  const setTimer = useCallback((startHour, startMin) => {
+    const now = new Date();
+    const min =
+      (parseInt(startHour) - now.getHours()) * 60 +
+      (parseInt(startMin) - now.getMinutes() - 1);
+    setHours(parseInt(min / 60));
+    setMinutes(min % 60);
+    setSeconds(60 - now.getSeconds());
+  }, []);
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -21,7 +32,7 @@ const useTimer = (min, sec) => {
     return () => clearInterval(countdown);
   }, [minutes, seconds]);
 
-  return [minutes, seconds];
+  return [hours, minutes, seconds, setTimer];
 };
 
 export default useTimer;
