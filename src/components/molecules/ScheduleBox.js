@@ -3,6 +3,7 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../atoms/Text';
 import TextWithIcon from '../molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
+import string from '../../utils/string';
 
 const ScheduleBox = ({count, width, data, day, time, onPress}) => {
   return (
@@ -14,7 +15,7 @@ const ScheduleBox = ({count, width, data, day, time, onPress}) => {
           </Text>
           {count >= 12 ? (
             <Text size="small" color="grey">
-              {data['scheduleType']}
+              {string(data['scheduleType'])}
             </Text>
           ) : null}
         </View>

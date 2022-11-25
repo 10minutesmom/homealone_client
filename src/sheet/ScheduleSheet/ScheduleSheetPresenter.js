@@ -5,6 +5,7 @@ import TextWithIcon from '../../components/molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
 import clock_icon from '../../asset/images/clock_icon.png';
 import Button from '../../components/molecules/Button';
+import string from '../../utils/string';
 
 const ScheduleSheetPresenter = ({data, startTime, endTime, onPress}) => {
   return (
@@ -12,7 +13,7 @@ const ScheduleSheetPresenter = ({data, startTime, endTime, onPress}) => {
       <View style={styles.bar} />
       <View>
         <Text size="big" color="black" marginBottom={8}>
-          {data['day']}
+          {string(data['day'])}
         </Text>
         <Text size="big" color="black" weight="bold" marginBottom={34}>
           {startTime} ~ {endTime}
@@ -22,7 +23,7 @@ const ScheduleSheetPresenter = ({data, startTime, endTime, onPress}) => {
             {data['title']}
           </Text>
           <Text size="small" color="grey">
-            {data['scheduleType']}
+            {string(data['scheduleType'])}
           </Text>
         </View>
         <TextWithIcon source={location_icon} marginBottom={6}>

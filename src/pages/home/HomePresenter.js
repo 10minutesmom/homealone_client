@@ -7,6 +7,7 @@ import Card from '../../components/atoms/Card';
 import TextWithIcon from '../../components/molecules/TextWithIcon';
 import location_icon from '../../asset/images/location_icon.png';
 import clock_icon from '../../asset/images/clock_icon.png';
+import string from '../../utils/string';
 
 const HomePresenter = ({
   hours,
@@ -31,14 +32,16 @@ const HomePresenter = ({
               <Text size="regular" weight="bold" color="black" marginBottom={8}>
                 {kidStatus.is_kid_home == 0
                   ? '외출중'
-                  : `집 내부 - ${kidStatus.where_is_kid}`}
+                  : `집 내부 - ${string(kidStatus.where_is_kid)}`}
               </Text>
               <Text size="medium" color="black" fixHeight={34}>
                 {kidStatus.is_kid_home == 0
                   ? '집 안에서 아이의 위치를 찾지\n못했습니당'
-                  : `아이를 ${kidStatus.where_is_kid}에서 찾았습니당${'\n'}${
-                      kidStatus.where_is_kid
-                    }에 ${kidStatus.is_kid_ready}하고 있네요~`}
+                  : `아이를 ${string(
+                      kidStatus.where_is_kid,
+                    )}에서 찾았습니당${'\n'}${string(
+                      kidStatus.where_is_kid,
+                    )}에 ${string(kidStatus.is_kid_ready)}있네요~`}
               </Text>
             </View>
             <Image
@@ -58,29 +61,37 @@ const HomePresenter = ({
         </Text>
 
         <Card height={212}>
-          <View style={contentStyle('column').content}>
-            <View style={marginStyle(26, 'row').margin}>
-              <Text size="regular" weight="bold" color="black" marginRight={8}>
-                {currentScheduleData.title}
+          {currentScheduleData.message !== 'No schedule!!' ? (
+            <View style={contentStyle('column').content}>
+              <View style={marginStyle(26, 'row').margin}>
+                <Text
+                  size="regular"
+                  weight="bold"
+                  color="black"
+                  marginRight={8}>
+                  {currentScheduleData.title}
+                </Text>
+                <Text size="small" color="grey">
+                  {currentScheduleData.scheduleType}
+                </Text>
+              </View>
+              <Text size="small" color="grey" marginBottom={2}>
+                남은시간
               </Text>
-              <Text size="small" color="grey">
-                {currentScheduleData.scheduleType}
+              <Text size="extra" color="black" weight="bold" marginBottom={10}>
+                {hours} : {minutes < 10 ? `0${minutes}` : minutes} :{' '}
+                {seconds < 10 ? `0${seconds}` : seconds}
               </Text>
+              <TextWithIcon source={location_icon} marginBottom={6}>
+                {currentScheduleData.location}
+              </TextWithIcon>
+              <TextWithIcon source={clock_icon}>
+                {currentScheduleData.startHour} : {currentScheduleData.startMin}
+              </TextWithIcon>
             </View>
-            <Text size="small" color="grey" marginBottom={2}>
-              남은시간
-            </Text>
-            <Text size="extra" color="black" weight="bold" marginBottom={10}>
-              {hours} : {minutes < 10 ? `0${minutes}` : minutes} :{' '}
-              {seconds < 10 ? `0${seconds}` : seconds}
-            </Text>
-            <TextWithIcon source={location_icon} marginBottom={6}>
-              {currentScheduleData.location}
-            </TextWithIcon>
-            <TextWithIcon source={clock_icon}>
-              {currentScheduleData.startHour} : {currentScheduleData.startMin}
-            </TextWithIcon>
-          </View>
+          ) : (
+            <Text size="regular">남은 스케쥴이 없습니다!</Text>
+          )}
         </Card>
       </View>
     </Container>
