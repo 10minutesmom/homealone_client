@@ -18,7 +18,7 @@ const ScheduleContainer = () => {
 
   const getScheduleData = () => {
     axios
-      .get('http://127.0.0.1:8000/apiserver/scheduleAllinit')
+      .get('http://api.whoswork.co.kr//apiserver/scheduleAllinit')
       .then(response => {
         setData(response.data);
       })

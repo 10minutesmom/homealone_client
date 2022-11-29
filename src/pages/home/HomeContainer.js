@@ -7,10 +7,11 @@ const HomeContainer = () => {
   const [currentScheduleData, setCurrentScheduleData] = useState({});
   const [kidStatus, setKidStatus] = useState({});
   const [hours, minutes, seconds, setTimer] = useTimer();
+  axios.defaults.withCredentials = true;
 
   const getCurrentSchedule = () => {
     axios
-      .get('http://127.0.0.1:8000/apiserver/schedulerecent')
+      .get('http://api.whoswork.co.kr/apiserver/schedulerecent')
       .then(response => {
         console.log(response.data);
         setCurrentScheduleData(response.data);
@@ -23,7 +24,7 @@ const HomeContainer = () => {
 
   const getKidStatus = () => {
     axios
-      .get('http://127.0.0.1:8000/apiserverkids/?format=json')
+      .get('http://api.whoswork.co.kr/apiserverkids/?format=json')
       .then(response => {
         setKidStatus(response.data[0]);
       })

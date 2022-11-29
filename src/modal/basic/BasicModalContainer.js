@@ -6,7 +6,7 @@ import createSnackbar from '../../utils/createSnackbar';
 const BasicModalContainer = ({close, getScheduleData, data}) => {
   const deleteSchedule = () => {
     axios
-      .post('http://127.0.0.1:8000/apiserver/scheduledelete', {
+      .post('http://api.whoswork.co.kr/apiserver/scheduledelete', {
         time: {
           day: data.current.day,
           startHour: data.current.startHour,

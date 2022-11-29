@@ -98,7 +98,7 @@ const ScheduleModalContainer = ({close, getScheduleData, data}) => {
     storeScheduleId(newId);
 
     axios
-      .post('http://127.0.0.1:8000/apiserver/scheduleadd', {
+      .post('http://api.whoswork.co.kr/apiserver/scheduleadd', {
         uid: '',
         id: newId,
         title: values.title,
@@ -134,7 +134,7 @@ const ScheduleModalContainer = ({close, getScheduleData, data}) => {
     }
 
     axios
-      .post('http://127.0.0.1:8000/apiserver/schedulemodify', {
+      .post('http://api.whoswork.co.kr/apiserver/schedulemodify', {
         uid: '',
         title: values.title,
         time: {

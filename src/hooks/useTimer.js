@@ -22,7 +22,13 @@ const useTimer = () => {
       }
       if (parseInt(seconds) === 0) {
         if (parseInt(minutes) === 0) {
-          clearInterval(countdown);
+          if (parseInt(hours) === 0) {
+            clearInterval(countdown);
+          } else {
+            setHours(parseInt(hours) - 1);
+            setMinutes(59);
+            setSeconds(59);
+          }
         } else {
           setMinutes(parseInt(minutes) - 1);
           setSeconds(59);
@@ -30,7 +36,7 @@ const useTimer = () => {
       }
     }, 1000);
     return () => clearInterval(countdown);
-  }, [minutes, seconds]);
+  }, [hours, minutes, seconds]);
 
   return [hours, minutes, seconds, setTimer];
 };
