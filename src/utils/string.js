@@ -1,5 +1,7 @@
 const string = text => {
   const stringMap = {
+    Livingroom: '거실',
+    Sitting: '앉아',
     living_room: '거실',
     kid_room: '아이방',
     standing: '서',

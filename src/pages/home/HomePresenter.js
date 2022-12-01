@@ -72,7 +72,7 @@ const HomePresenter = ({
                   {currentScheduleData.title}
                 </Text>
                 <Text size="small" color="grey">
-                  {currentScheduleData.scheduleType}
+                  {string(currentScheduleData.scheduleType)}
                 </Text>
               </View>
               <Text size="small" color="grey" marginBottom={2}>
